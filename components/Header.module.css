@@ -19,7 +19,6 @@
     align-items: center;
     justify-content: space-between;
     height: 72px;
-    gap: 16px;
 }
 
 /* Logo */
@@ -46,8 +45,8 @@
     letter-spacing: 0.12em;
 }
 
-/* Right */
-.rightSide {
+/* Actions */
+.actions {
     display: flex;
     align-items: center;
     gap: 14px;
@@ -70,7 +69,7 @@
     transform: scale(1.08);
 }
 
-/* Left */
+/* Left Side (Utility) */
 .leftSide {
     display: flex;
     align-items: center;
@@ -80,7 +79,7 @@
 .desktopNav {
     display: none;
     align-items: center;
-    gap: 22px;
+    gap: 32px;
 }
 
 .desktopNavLink {
@@ -98,7 +97,7 @@
     display: inline-flex;
 }
 
-.desktopSideCta {
+.desktopCta {
     display: none;
     padding: 10px 18px;
     font-size: 0.84rem;
@@ -174,29 +173,7 @@
     animation: fadeIn 0.3s ease;
 }
 
-@media (min-width: 1025px) {
-    .inner {
-        display: grid;
-        grid-template-columns: 1fr auto 1fr;
-        align-items: center;
-        gap: 20px;
-    }
-
-    .rightSide {
-        grid-column: 1;
-        justify-self: start;
-    }
-
-    .leftSide {
-        grid-column: 2;
-        justify-self: center;
-    }
-
-    .logo {
-        grid-column: 3;
-        justify-self: end;
-    }
-
+@media (min-width: 1024px) {
     .desktopNav {
         display: flex;
     }
@@ -205,7 +182,7 @@
         display: none;
     }
 
-    .desktopSideCta {
+    .desktopCta {
         display: inline-flex;
     }
 

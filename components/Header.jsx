@@ -54,15 +54,31 @@ export default function Header({ settings }) {
     return (
         <header className={`${styles.header} ${scrolled ? styles.scrolled : ''}`}>
             <div className={`container ${styles.inner}`}>
-                <div className={styles.rightSide}>
+                <div className={styles.logo}>
+                    <Link href="/">
+                        <span className={styles.logoText}>{brandName}</span>
+                        <span className={styles.logoAr}>{AR_LABELS.logo}</span>
+                    </Link>
+                </div>
+
+                <nav className={styles.desktopNav} aria-label="Main">
+                    {navLinks.map((link) => (
+                        <Link key={link.href} href={link.href} className={styles.desktopNavLink}>
+                            {link.label}
+                        </Link>
+                    ))}
+                </nav>
+
+                <div className={styles.actions}>
                     <a
                         href={bookLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className={`btn-gold ${styles.desktopSideCta}`}
+                        className={`btn-gold ${styles.desktopCta}`}
                     >
                         {AR_LABELS.bookFree}
                     </a>
+
                     <a
                         href={whatsappLink}
                         target="_blank"
@@ -72,32 +88,6 @@ export default function Header({ settings }) {
                     >
                         <FaWhatsapp size={22} />
                     </a>
-                    <a
-                        href={bookLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={`btn-gold ${styles.topCta}`}
-                        style={{ padding: '10px 20px', fontSize: '0.88rem' }}
-                    >
-                        {AR_LABELS.book}
-                    </a>
-                </div>
-
-                <div className={styles.logo}>
-                    <Link href="/">
-                        <span className={styles.logoText}>{brandName}</span>
-                        <span className={styles.logoAr}>{AR_LABELS.logo}</span>
-                    </Link>
-                </div>
-
-                <div className={styles.leftSide}>
-                    <nav className={styles.desktopNav} aria-label="Main">
-                        {navLinks.map((link) => (
-                            <Link key={link.href} href={link.href} className={styles.desktopNavLink}>
-                                {link.label}
-                            </Link>
-                        ))}
-                    </nav>
 
                     <button
                         type="button"
@@ -114,6 +104,14 @@ export default function Header({ settings }) {
 
             <nav id="mobile-nav" className={`${styles.nav} ${menuOpen ? styles.navOpen : ''}`}>
                 <div className={styles.navInner}>
+                    <button
+                        type="button"
+                        className={styles.closeBtn}
+                        onClick={() => setMenuOpen(false)}
+                        aria-label={AR_LABELS.menu}
+                    >
+                        <FiX size={28} />
+                    </button>
                     {navLinks.map((link) => (
                         <Link
                             key={link.href}
