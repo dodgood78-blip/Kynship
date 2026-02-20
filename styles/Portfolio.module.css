@@ -1,7 +1,7 @@
 .pageHeader {
-    background: var(--light-gray);
+    background: linear-gradient(180deg, rgba(35, 74, 104, 0.12), rgba(35, 74, 104, 0.04));
     padding: 120px 0 64px;
-    border-bottom: 1px solid var(--medium-gray);
+    border-bottom: 1px solid rgba(35, 74, 104, 0.16);
 }
 
 .pageTitle {
@@ -10,7 +10,7 @@
 }
 
 .pageSub {
-    color: var(--text-muted);
+    color: var(--text-body);
     font-size: 1rem;
     max-width: 500px;
 }

@@ -5,7 +5,7 @@ export default function CTASection() {
         <section className={styles.section}>
             <div className="container">
                 <div className={styles.inner}>
-                    <span className="section-label" style={{ color: 'rgba(200,166,70,0.9)' }}>ابدأ رحلتك معنا</span>
+                    <span className="section-label" style={{ color: 'rgba(242,183,5,0.95)' }}>ابدأ رحلتك معنا</span>
                     <h2 className={styles.title}>جاهز تبدأ مشروعك؟</h2>
                     <p className={styles.subtitle}>
                         نحن هنا لنحول أفكارك إلى واقع. تواصل معنا اليوم للحصول على استشارة مجانية.

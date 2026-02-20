@@ -1,5 +1,5 @@
 .section {
-    background: var(--light-gray);
+    background: var(--surface);
 }
 
 .header {
@@ -19,20 +19,21 @@
     text-align: center;
     box-shadow: var(--shadow-sm);
     transition: var(--transition);
+    border: 1px solid rgba(35, 74, 104, 0.14);
     border-bottom: 3px solid transparent;
 }
 
 .card:hover {
     transform: translateY(-5px);
     box-shadow: var(--shadow-md);
-    border-bottom-color: var(--gold);
+    border-bottom-color: var(--primary-blue);
 }
 
 .iconWrap {
     width: 68px;
     height: 68px;
     border-radius: 50%;
-    background: linear-gradient(135deg, rgba(200, 166, 70, 0.1), rgba(200, 166, 70, 0.05));
+    background: linear-gradient(135deg, rgba(35, 74, 104, 0.12), rgba(35, 74, 104, 0.06));
     display: flex;
     align-items: center;
     justify-content: center;
@@ -41,7 +42,7 @@
 }
 
 .card:hover .iconWrap {
-    background: linear-gradient(135deg, rgba(200, 166, 70, 0.2), rgba(200, 166, 70, 0.1));
+    background: linear-gradient(135deg, rgba(35, 74, 104, 0.2), rgba(35, 74, 104, 0.1));
 }
 
 .icon {

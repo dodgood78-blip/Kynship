@@ -4,14 +4,14 @@
     right: 0;
     left: 0;
     z-index: 1000;
-    background: rgba(255, 255, 255, 0.97);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+    background: rgba(245, 245, 245, 0.95);
+    border-bottom: 1px solid rgba(35, 74, 104, 0.12);
     transition: box-shadow 0.3s ease;
     backdrop-filter: blur(8px);
 }
 
 .header.scrolled {
-    box-shadow: 0 2px 24px rgba(0, 0, 0, 0.09);
+    box-shadow: 0 8px 24px rgba(16, 20, 24, 0.12);
 }
 
 .inner {
@@ -34,7 +34,7 @@
 .logoText {
     font-size: 1.5rem;
     font-weight: 900;
-    color: var(--charcoal);
+    color: var(--primary-blue);
     letter-spacing: 0.06em;
     text-transform: uppercase;
 }
@@ -61,12 +61,12 @@
     height: 38px;
     border-radius: 50%;
     color: #25D366;
-    background: rgba(37, 211, 102, 0.08);
+    background: rgba(35, 74, 104, 0.08);
     transition: var(--transition);
 }
 
 .whatsappBtn:hover {
-    background: rgba(37, 211, 102, 0.18);
+    background: rgba(35, 74, 104, 0.16);
     transform: scale(1.08);
 }
 
@@ -86,12 +86,12 @@
 .desktopNavLink {
     font-size: 0.95rem;
     font-weight: 600;
-    color: var(--charcoal);
+    color: var(--primary-blue);
     transition: var(--transition);
 }
 
 .desktopNavLink:hover {
-    color: var(--gold);
+    color: var(--accent-yellow-dark);
 }
 
 .topCta {
@@ -111,13 +111,13 @@
     width: 42px;
     height: 42px;
     background: transparent;
-    color: var(--charcoal);
+    color: var(--primary-blue);
     border-radius: var(--radius);
     transition: var(--transition);
 }
 
 .menuBtn:hover {
-    background: var(--light-gray);
+    background: rgba(35, 74, 104, 0.08);
 }
 
 /* Slide-out Nav */
@@ -127,11 +127,11 @@
     left: 0;
     width: 320px;
     height: 100vh;
-    background: var(--white);
+    background: var(--off-white);
     transform: translateX(-100%);
     transition: transform 0.38s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 1100;
-    box-shadow: 4px 0 40px rgba(0, 0, 0, 0.12);
+    box-shadow: 4px 0 40px rgba(16, 20, 24, 0.16);
 }
 
 .nav.navOpen {
@@ -148,14 +148,14 @@
 .navLink {
     font-size: 1.1rem;
     font-weight: 600;
-    color: var(--charcoal);
+    color: var(--primary-blue);
     padding: 14px 0;
     border-bottom: 1px solid var(--medium-gray);
     transition: var(--transition);
 }
 
 .navLink:hover {
-    color: var(--gold);
+    color: var(--accent-yellow-dark);
     padding-right: 8px;
 }
 

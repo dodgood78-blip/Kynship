@@ -32,19 +32,19 @@
     font-weight: 800;
     color: var(--white);
     margin-bottom: 20px;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.01em;
 }
 
 .goldLine {
     width: 48px;
-    height: 2px;
-    background: var(--gold);
+    height: 3px;
+    background: var(--accent-yellow);
     margin-bottom: 24px;
 }
 
 .text {
     font-size: 1rem;
-    color: rgba(255, 255, 255, 0.65);
+    color: rgba(245, 245, 245, 0.72);
     line-height: 1.85;
     margin-bottom: 28px;
     max-width: 480px;
@@ -59,7 +59,7 @@
 
 .features li {
     font-size: 0.93rem;
-    color: rgba(255, 255, 255, 0.75);
+    color: rgba(245, 245, 245, 0.78);
     display: flex;
     align-items: center;
     gap: 10px;
@@ -89,16 +89,16 @@
 }
 
 .visualInner {
-    background: linear-gradient(135deg, rgba(200, 166, 70, 0.08), rgba(255, 255, 255, 0.04));
-    border: 1px solid rgba(200, 166, 70, 0.15);
+    background: linear-gradient(135deg, rgba(45, 92, 127, 0.24), rgba(255, 255, 255, 0.04));
+    border: 1px solid rgba(242, 183, 5, 0.18);
     border-radius: var(--radius-md);
     aspect-ratio: 1;
     transition: var(--transition);
 }
 
 .visualItem:hover .visualInner {
-    border-color: rgba(200, 166, 70, 0.4);
-    background: linear-gradient(135deg, rgba(200, 166, 70, 0.15), rgba(255, 255, 255, 0.06));
+    border-color: rgba(242, 183, 5, 0.45);
+    background: linear-gradient(135deg, rgba(35, 74, 104, 0.4), rgba(255, 255, 255, 0.08));
 }
 
 @media (max-width: 1024px) {

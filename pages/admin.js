@@ -1,9 +1,6 @@
 import { useEffect } from 'react';
-import { useRouter } from 'next/router';
 
 export default function AdminPage() {
-    const router = useRouter();
-
     useEffect(() => {
         // Redirect to TinaCMS admin panel
         window.location.href = '/admin/index.html';
@@ -16,14 +13,14 @@ export default function AdminPage() {
             alignItems: 'center',
             justifyContent: 'center',
             minHeight: '100vh',
-            fontFamily: 'Cairo, sans-serif',
-            background: '#fafaf8',
+            fontFamily: 'IBM Plex Arabic, sans-serif',
+            background: '#F5F5F5',
         }}>
-            <div style={{ textAlign: 'center', color: '#3a3a3a' }}>
-                <div style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: 12, color: '#C8A646' }}>
+            <div style={{ textAlign: 'center', color: '#2F3439' }}>
+                <div style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: 12, color: '#234A68' }}>
                     Kynship Admin
                 </div>
-                <p style={{ color: '#7a7a7a' }}>جاري التوجيه إلى لوحة الإدارة...</p>
+                <p style={{ color: '#66727D' }}>جاري التوجيه إلى لوحة الإدارة...</p>
             </div>
         </div>
     );

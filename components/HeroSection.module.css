@@ -5,16 +5,16 @@
     display: flex;
     align-items: center;
     background: url('/images/hero-kitchen.jpg') center center / cover no-repeat;
-    background-color: #1a1410;
+    background-color: var(--primary-blue-dark);
 }
 
 .overlay {
     position: absolute;
     inset: 0;
     background: linear-gradient(135deg,
-            rgba(10, 8, 5, 0.78) 0%,
-            rgba(20, 15, 8, 0.60) 60%,
-            rgba(10, 8, 5, 0.55) 100%);
+            rgba(12, 24, 35, 0.84) 0%,
+            rgba(22, 39, 54, 0.66) 58%,
+            rgba(14, 28, 41, 0.62) 100%);
 }
 
 .content {
@@ -30,9 +30,9 @@
     font-weight: 700;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--gold);
-    background: rgba(200, 166, 70, 0.12);
-    border: 1px solid rgba(200, 166, 70, 0.3);
+    color: var(--accent-yellow);
+    background: rgba(242, 183, 5, 0.12);
+    border: 1px solid rgba(242, 183, 5, 0.36);
     padding: 8px 18px;
     border-radius: 2px;
     margin-bottom: 28px;
@@ -49,13 +49,13 @@
 }
 
 .accent {
-    color: var(--gold);
+    color: var(--accent-yellow);
     display: block;
 }
 
 .subtext {
     font-size: clamp(1rem, 1.8vw, 1.2rem);
-    color: rgba(255, 255, 255, 0.78);
+    color: rgba(245, 245, 245, 0.82);
     margin-bottom: 44px;
     font-weight: 400;
     max-width: 480px;
@@ -81,7 +81,7 @@
 .scrollLine {
     width: 1px;
     height: 60px;
-    background: linear-gradient(to bottom, rgba(200, 166, 70, 0.8), transparent);
+    background: linear-gradient(to bottom, rgba(242, 183, 5, 0.86), transparent);
     margin: 0 auto;
     animation: scrollPulse 2s ease-in-out infinite;
 }

@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import styles from './CategoriesSection.module.css';
 
@@ -9,7 +8,7 @@ const categories = [
         subtitle: 'تصاميم عصرية وكلاسيكية',
         image: '/images/cat-kitchen.jpg',
         href: '/portfolio?category=مطابخ',
-        bg: '#1a120a',
+        bg: '#1B3A52',
     },
     {
         id: 'wardrobes',
@@ -17,7 +16,7 @@ const categories = [
         subtitle: 'تنظيم مثالي وأناقة فائقة',
         image: '/images/cat-wardrobe.jpg',
         href: '/portfolio?category=غرف ملابس',
-        bg: '#0d1215',
+        bg: '#213E56',
     },
     {
         id: 'tv-units',
@@ -25,7 +24,7 @@ const categories = [
         subtitle: 'تصاميم مخصصة لكل مساحة',
         image: '/images/cat-tv.jpg',
         href: '/portfolio?category=وحدات تلفزيون',
-        bg: '#0f120d',
+        bg: '#1F3447',
     },
     {
         id: 'special',
@@ -33,7 +32,7 @@ const categories = [
         subtitle: 'أفكارك بلمستنا الاحترافية',
         image: '/images/cat-special.jpg',
         href: '/portfolio?category=تصميمات خاصة',
-        bg: '#120d12',
+        bg: '#25384A',
     },
 ];
 

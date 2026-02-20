@@ -6,6 +6,7 @@
     box-shadow: var(--shadow-sm);
     transition: var(--transition);
     cursor: pointer;
+    border: 1px solid rgba(35, 74, 104, 0.14);
 }
 
 .card:hover {
@@ -16,7 +17,7 @@
 .imageWrap {
     position: relative;
     aspect-ratio: 4/3;
-    background: linear-gradient(135deg, #1a120a, #2a1f15);
+    background: linear-gradient(135deg, #1B3A52, #294B66);
     overflow: hidden;
 }
 
@@ -32,9 +33,9 @@
     display: inline-block;
     font-size: 0.75rem;
     font-weight: 700;
-    color: var(--gold);
-    background: rgba(200, 166, 70, 0.15);
-    border: 1px solid rgba(200, 166, 70, 0.3);
+    color: var(--accent-yellow);
+    background: rgba(242, 183, 5, 0.15);
+    border: 1px solid rgba(242, 183, 5, 0.35);
     padding: 5px 12px;
     border-radius: 2px;
     letter-spacing: 0.06em;
@@ -43,7 +44,7 @@
 .overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.4) 0%, transparent 60%);
+    background: linear-gradient(to top, rgba(16, 20, 24, 0.52) 0%, transparent 60%);
 }
 
 .info {
@@ -53,7 +54,7 @@
 .category {
     font-size: 0.75rem;
     font-weight: 700;
-    color: var(--gold);
+    color: var(--accent-yellow-dark);
     letter-spacing: 0.1em;
     text-transform: uppercase;
     display: block;
@@ -94,7 +95,7 @@
 
 .arrow {
     font-size: 0.82rem;
-    color: var(--gold);
+    color: var(--primary-blue);
     font-weight: 700;
     transition: var(--transition);
 }
