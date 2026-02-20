@@ -1,0 +1,145 @@
+.page {
+    padding-top: 72px;
+}
+
+.hero {
+    position: relative;
+    height: 420px;
+    background: linear-gradient(135deg, #1a120a, #2a1f10);
+    display: flex;
+    align-items: flex-end;
+}
+
+.heroOverlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.2));
+}
+
+.heroContent {
+    position: relative;
+    z-index: 2;
+    padding-bottom: 48px;
+}
+
+.category {
+    display: inline-block;
+    font-size: 0.76rem;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    border: 1px solid rgba(200, 166, 70, 0.4);
+    padding: 5px 14px;
+    border-radius: 2px;
+    margin-bottom: 16px;
+}
+
+.title {
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-weight: 800;
+    color: var(--white);
+    margin-bottom: 10px;
+}
+
+.date {
+    font-size: 0.88rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.layout {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 48px;
+    align-items: flex-start;
+}
+
+.sectionTitle {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+
+.description {
+    font-size: 1rem;
+    color: var(--text-body);
+    line-height: 1.9;
+    margin-top: 24px;
+    margin-bottom: 40px;
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.imagePlaceholder {
+    aspect-ratio: 4/3;
+    background: linear-gradient(135deg, #f5f4f1, #ede9e0);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    border: 1px solid var(--medium-gray);
+}
+
+.sidebar {
+    position: sticky;
+    top: 96px;
+    display: flex;
+    flex-direction: column;
+}
+
+.infoCard {
+    background: var(--light-gray);
+    border-radius: var(--radius-md);
+    padding: 24px;
+}
+
+.infoCard h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: var(--charcoal);
+}
+
+.infoRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--medium-gray);
+    font-size: 0.9rem;
+}
+
+.infoRow:last-child {
+    border-bottom: none;
+}
+
+.infoLabel {
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+@media (max-width: 900px) {
+    .layout {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        position: static;
+    }
+}
+
+@media (max-width: 640px) {
+    .gallery {
+        grid-template-columns: 1fr;
+    }
+
+    .hero {
+        height: 300px;
+    }
+}
