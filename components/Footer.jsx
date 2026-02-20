@@ -71,9 +71,7 @@ export default function Footer({ settings }) {
                         <a href={facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook">
                             <FaFacebookF size={20} />
                         </a>
-                        <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
-                            <FaTiktok size={20} />
-                        </a>
+
                     </div>
                 </div>
             </div>
