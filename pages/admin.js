@@ -2,7 +2,11 @@ import { useEffect } from 'react';
 
 export default function AdminPage() {
     useEffect(() => {
-        // Redirect to TinaCMS admin panel
+        // Use Tina dev UI locally, static admin bundle in production.
+        if (process.env.NODE_ENV === 'development') {
+            window.location.href = 'http://localhost:4001';
+            return;
+        }
         window.location.href = '/admin/index.html';
     }, []);
 

@@ -2,12 +2,10 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { FiMenu, FiX } from 'react-icons/fi';
 import { FaWhatsapp } from 'react-icons/fa';
+import { buildWhatsappUrl, normalizeWhatsappNumber } from '../lib/siteUtils';
 import styles from './Header.module.css';
 
 const MOBILE_MENU_MAX_WIDTH = 1024;
-const WHATSAPP_LINK = 'https://wa.me/201000000000';
-const BOOK_LINK =
-    'https://wa.me/201000000000?text=%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%AD%D8%AC%D8%B2%20%D9%85%D8%B9%D8%A7%D9%8A%D9%86%D8%A9';
 
 const AR_LABELS = {
     home: '\u0627\u0644\u0631\u0626\u064a\u0633\u064a\u0629',
@@ -20,7 +18,12 @@ const AR_LABELS = {
     bookFree: '\u0627\u062d\u062c\u0632 \u0645\u0639\u0627\u064a\u0646\u0629 \u0645\u062c\u0627\u0646\u064a\u0629',
 };
 
-export default function Header() {
+export default function Header({ settings }) {
+    const whatsappNumber = normalizeWhatsappNumber(settings?.whatsapp);
+    const whatsappLink = buildWhatsappUrl(whatsappNumber);
+    const bookLink = buildWhatsappUrl(whatsappNumber, AR_LABELS.bookFree);
+    const brandName = settings?.brandName || 'Kynship';
+
     const [scrolled, setScrolled] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
 
@@ -53,7 +56,7 @@ export default function Header() {
             <div className={`container ${styles.inner}`}>
                 <div className={styles.rightSide}>
                     <a
-                        href={WHATSAPP_LINK}
+                        href={whatsappLink}
                         target="_blank"
                         rel="noopener noreferrer"
                         className={styles.whatsappBtn}
@@ -62,7 +65,7 @@ export default function Header() {
                         <FaWhatsapp size={22} />
                     </a>
                     <a
-                        href={BOOK_LINK}
+                        href={bookLink}
                         target="_blank"
                         rel="noopener noreferrer"
                         className={`btn-gold ${styles.topCta}`}
@@ -74,7 +77,7 @@ export default function Header() {
 
                 <div className={styles.logo}>
                     <Link href="/">
-                        <span className={styles.logoText}>Kynship</span>
+                        <span className={styles.logoText}>{brandName}</span>
                         <span className={styles.logoAr}>{AR_LABELS.logo}</span>
                     </Link>
                 </div>
@@ -87,7 +90,7 @@ export default function Header() {
                             </Link>
                         ))}
                         <a
-                            href={BOOK_LINK}
+                            href={bookLink}
                             target="_blank"
                             rel="noopener noreferrer"
                             className={`btn-gold ${styles.desktopCta}`}
@@ -123,7 +126,7 @@ export default function Header() {
                     ))}
                     <div className={styles.navDivider} />
                     <a
-                        href={BOOK_LINK}
+                        href={bookLink}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="btn-gold"

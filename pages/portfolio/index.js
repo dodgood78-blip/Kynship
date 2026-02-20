@@ -3,6 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import ProjectCard from '../../components/ProjectCard';
 import styles from '../../styles/Portfolio.module.css';
+import { loadSettings } from '../../lib/siteContent';
 
 export default function PortfolioPage({ projects }) {
     return (
@@ -54,6 +55,7 @@ export default function PortfolioPage({ projects }) {
 export async function getStaticProps() {
     const contentDir = path.join(process.cwd(), 'content', 'projects');
     let projects = [];
+    const settings = loadSettings();
 
     try {
         if (fs.existsSync(contentDir)) {
@@ -69,6 +71,7 @@ export async function getStaticProps() {
     }
 
     return {
-        props: { projects },
+        props: { projects, settings },
+        revalidate: 1,
     };
 }

@@ -3,8 +3,13 @@ import Link from 'next/link';
 import fs from 'fs';
 import path from 'path';
 import styles from '../../styles/ProjectDetail.module.css';
+import { loadSettings } from '../../lib/siteContent';
+import { buildWhatsappUrl, normalizeWhatsappNumber } from '../../lib/siteUtils';
 
-export default function ProjectDetailPage({ project }) {
+export default function ProjectDetailPage({ project, settings }) {
+    const whatsappNumber = normalizeWhatsappNumber(settings?.whatsapp);
+    const similarProjectLink = buildWhatsappUrl(whatsappNumber, 'أريد مشروع مشابه');
+
     if (!project) {
         return (
             <div className="container" style={{ padding: '120px 24px', textAlign: 'center' }}>
@@ -71,7 +76,7 @@ export default function ProjectDetailPage({ project }) {
                                     </div>
                                 </div>
                                 <a
-                                    href="https://wa.me/201000000000?text=أريد مشروع مشابه"
+                                    href={similarProjectLink}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="btn-gold"
@@ -106,12 +111,13 @@ export async function getStaticPaths() {
         console.error('Error reading paths:', err);
     }
 
-    return { paths, fallback: false };
+    return { paths, fallback: 'blocking' };
 }
 
 export async function getStaticProps({ params }) {
     const contentDir = path.join(process.cwd(), 'content', 'projects');
     let project = null;
+    const settings = loadSettings();
 
     try {
         const files = fs.readdirSync(contentDir).filter((f) => f.endsWith('.json'));
@@ -127,5 +133,15 @@ export async function getStaticProps({ params }) {
         console.error('Error reading project:', err);
     }
 
-    return { props: { project } };
+    if (!project) {
+        return {
+            notFound: true,
+            revalidate: 1,
+        };
+    }
+
+    return {
+        props: { project, settings },
+        revalidate: 1,
+    };
 }

@@ -1,56 +1,76 @@
 import Link from 'next/link';
 import { FaWhatsapp, FaInstagram, FaFacebookF, FaTiktok } from 'react-icons/fa';
 import { MdLocationOn, MdPhone, MdEmail } from 'react-icons/md';
+import { buildWhatsappUrl, normalizeWhatsappNumber } from '../lib/siteUtils';
 import styles from './Footer.module.css';
 
-export default function Footer() {
+const AR = {
+    logo: '\u0643\u064a\u0646\u0634\u064a\u0628',
+    tagline: '\u0646\u0635\u0645\u0645 \u0645\u0633\u0627\u062d\u062a\u0643 \u0628\u062f\u0642\u0629 \u0641\u064a \u0643\u0644 \u062a\u0641\u0635\u064a\u0644\u0629',
+    quickLinks: '\u0631\u0648\u0627\u0628\u0637 \u0633\u0631\u064a\u0639\u0629',
+    home: '\u0627\u0644\u0631\u0626\u064a\u0633\u064a\u0629',
+    portfolio: '\u0623\u0639\u0645\u0627\u0644\u0646\u0627',
+    contact: '\u062a\u0648\u0627\u0635\u0644 \u0645\u0639\u0646\u0627',
+    admin: '\u0644\u0648\u062d\u0629 \u0627\u0644\u0625\u062f\u0627\u0631\u0629',
+    contactTitle: '\u062a\u0648\u0627\u0635\u0644 \u0645\u0639\u0646\u0627',
+    follow: '\u062a\u0627\u0628\u0639\u0646\u0627',
+    rights: '\u062c\u0645\u064a\u0639 \u0627\u0644\u062d\u0642\u0648\u0642 \u0645\u062d\u0641\u0648\u0638\u0629.',
+};
+
+export default function Footer({ settings }) {
+    const brandName = settings?.brandName || 'Kynship';
+    const phone = settings?.phone || '+20 100 000 0000';
+    const email = settings?.email || 'info@kynship.com';
+    const location =
+        settings?.location ||
+        '\u0627\u0644\u0632\u0642\u0627\u0632\u064a\u0642\u060c \u0645\u062d\u0627\u0641\u0638\u0629 \u0627\u0644\u0634\u0631\u0642\u064a\u0629\u060c \u0645\u0635\u0631';
+    const whatsappUrl = buildWhatsappUrl(normalizeWhatsappNumber(settings?.whatsapp));
+    const instagram = settings?.instagram || 'https://instagram.com';
+    const facebook = settings?.facebook || 'https://facebook.com';
+
     return (
         <footer className={styles.footer}>
             <div className={`container ${styles.inner}`}>
-                {/* Brand */}
                 <div className={styles.brand}>
-                    <div className={styles.logoText}>Kynship</div>
-                    <div className={styles.logoAr}>كينشيب</div>
-                    <p className={styles.tagline}>نصمم مساحتك بدقة في كل تفصيلة</p>
+                    <div className={styles.logoText}>{brandName}</div>
+                    <div className={styles.logoAr}>{AR.logo}</div>
+                    <p className={styles.tagline}>{AR.tagline}</p>
                 </div>
 
-                {/* Links */}
                 <div className={styles.links}>
-                    <h4 className={styles.colTitle}>روابط سريعة</h4>
-                    <Link href="/">الرئيسية</Link>
-                    <Link href="/portfolio">أعمالنا</Link>
-                    <Link href="/contact">تواصل معنا</Link>
-                    <a href="/admin">لوحة الإدارة</a>
+                    <h4 className={styles.colTitle}>{AR.quickLinks}</h4>
+                    <Link href="/">{AR.home}</Link>
+                    <Link href="/portfolio">{AR.portfolio}</Link>
+                    <Link href="/contact">{AR.contact}</Link>
+                    <a href="/admin">{AR.admin}</a>
                 </div>
 
-                {/* Contact */}
                 <div className={styles.contact}>
-                    <h4 className={styles.colTitle}>تواصل معنا</h4>
+                    <h4 className={styles.colTitle}>{AR.contactTitle}</h4>
                     <div className={styles.contactItem}>
                         <MdLocationOn size={18} />
-                        <span>الزقازيق، محافظة الشرقية، مصر</span>
+                        <span>{location}</span>
                     </div>
                     <div className={styles.contactItem}>
                         <MdPhone size={18} />
-                        <span>+20 100 000 0000</span>
+                        <span>{phone}</span>
                     </div>
                     <div className={styles.contactItem}>
                         <MdEmail size={18} />
-                        <span>info@kynship.com</span>
+                        <span>{email}</span>
                     </div>
                 </div>
 
-                {/* Social */}
                 <div className={styles.social}>
-                    <h4 className={styles.colTitle}>تابعنا</h4>
+                    <h4 className={styles.colTitle}>{AR.follow}</h4>
                     <div className={styles.socialIcons}>
-                        <a href="https://wa.me/201000000000" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+                        <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
                             <FaWhatsapp size={20} />
                         </a>
-                        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                        <a href={instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                             <FaInstagram size={20} />
                         </a>
-                        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                        <a href={facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook">
                             <FaFacebookF size={20} />
                         </a>
                         <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
@@ -62,7 +82,9 @@ export default function Footer() {
 
             <div className={styles.bottom}>
                 <div className="container">
-                    <p>© {new Date().getFullYear()} Kynship. جميع الحقوق محفوظة.</p>
+                    <p>
+                        {'\u00A9'} {new Date().getFullYear()} {brandName}. {AR.rights}
+                    </p>
                 </div>
             </div>
         </footer>

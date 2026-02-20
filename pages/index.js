@@ -7,6 +7,8 @@ import TrustSection from '../components/TrustSection';
 import StudioSection from '../components/StudioSection';
 import ReviewsSection from '../components/ReviewsSection';
 import CTASection from '../components/CTASection';
+import { loadReviews, loadSettings } from '../lib/siteContent';
+import { normalizeWhatsappNumber } from '../lib/siteUtils';
 
 const defaultHomeContent = {
     hero: {
@@ -85,7 +87,33 @@ function mergeContent(defaultContent, storedContent) {
     };
 }
 
-export default function HomePage({ homeContent }) {
+function updateWhatsappLink(link, whatsappNumber) {
+    if (typeof link !== 'string' || !link.includes('wa.me/')) {
+        return link;
+    }
+    return link.replace(/wa\.me\/\d+/i, `wa.me/${whatsappNumber}`);
+}
+
+function applySettingsToHomeContent(content, settings) {
+    const whatsappNumber = normalizeWhatsappNumber(settings?.whatsapp);
+    return {
+        ...content,
+        hero: {
+            ...content.hero,
+            primaryCtaLink: updateWhatsappLink(content.hero?.primaryCtaLink, whatsappNumber),
+        },
+        studio: {
+            ...content.studio,
+            ctaLink: updateWhatsappLink(content.studio?.ctaLink, whatsappNumber),
+        },
+        cta: {
+            ...content.cta,
+            primaryLink: updateWhatsappLink(content.cta?.primaryLink, whatsappNumber),
+        },
+    };
+}
+
+export default function HomePage({ homeContent, reviews }) {
     return (
         <>
             <Head>
@@ -109,7 +137,7 @@ export default function HomePage({ homeContent }) {
             <CategoriesSection data={homeContent.categories} />
             <TrustSection data={homeContent.trust} />
             <StudioSection data={homeContent.studio} />
-            <ReviewsSection />
+            <ReviewsSection reviews={reviews} />
             <CTASection data={homeContent.cta} />
         </>
     );
@@ -118,6 +146,8 @@ export default function HomePage({ homeContent }) {
 export async function getStaticProps() {
     const homepagePath = path.join(process.cwd(), 'content', 'homepage', 'index.json');
     let homeContent = defaultHomeContent;
+    const settings = loadSettings();
+    const reviews = loadReviews();
 
     try {
         if (fs.existsSync(homepagePath)) {
@@ -129,9 +159,14 @@ export async function getStaticProps() {
         console.error('Error reading homepage content:', error);
     }
 
+    homeContent = applySettingsToHomeContent(homeContent, settings);
+
     return {
         props: {
             homeContent,
+            reviews,
+            settings,
         },
+        revalidate: 1,
     };
 }

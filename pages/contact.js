@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import Head from 'next/head';
 import styles from '../styles/Contact.module.css';
+import { loadSettings } from '../lib/siteContent';
+import { buildWhatsappUrl, normalizeWhatsappNumber } from '../lib/siteUtils';
 
 const projectTypes = [
     'مطبخ',
@@ -10,7 +12,13 @@ const projectTypes = [
     'أخرى',
 ];
 
-export default function ContactPage() {
+export default function ContactPage({ settings }) {
+    const whatsappNumber = normalizeWhatsappNumber(settings?.whatsapp);
+    const inquiryWhatsappLink = buildWhatsappUrl(whatsappNumber, 'مرحبا، أريد الاستفسار');
+    const phone = settings?.phone || '+20 100 000 0000';
+    const email = settings?.email || 'info@kynship.com';
+    const location = settings?.location || 'الزقازيق، محافظة الشرقية، مصر';
+
     const [form, setForm] = useState({
         name: '',
         phone: '',
@@ -185,21 +193,21 @@ export default function ContactPage() {
                                         <span className={styles.infoIcon}>📍</span>
                                         <div>
                                             <strong>الموقع</strong>
-                                            <p>الزقازيق، محافظة الشرقية، مصر</p>
+                                            <p>{location}</p>
                                         </div>
                                     </div>
                                     <div className={styles.infoItem}>
                                         <span className={styles.infoIcon}>📞</span>
                                         <div>
                                             <strong>الهاتف</strong>
-                                            <p>+20 100 000 0000</p>
+                                            <p>{phone}</p>
                                         </div>
                                     </div>
                                     <div className={styles.infoItem}>
                                         <span className={styles.infoIcon}>✉️</span>
                                         <div>
                                             <strong>البريد الإلكتروني</strong>
-                                            <p>info@kynship.com</p>
+                                            <p>{email}</p>
                                         </div>
                                     </div>
                                     <div className={styles.infoItem}>
@@ -211,7 +219,7 @@ export default function ContactPage() {
                                     </div>
                                 </div>
                                 <a
-                                    href="https://wa.me/201000000000?text=مرحبا، أريد الاستفسار"
+                                    href={inquiryWhatsappLink}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="btn-gold"
@@ -226,4 +234,13 @@ export default function ContactPage() {
             </div>
         </>
     );
+}
+
+export async function getStaticProps() {
+    const settings = loadSettings();
+
+    return {
+        props: { settings },
+        revalidate: 1,
+    };
 }
