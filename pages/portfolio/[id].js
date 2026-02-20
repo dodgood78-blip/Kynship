@@ -1,5 +1,7 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import styles from '../../styles/ProjectDetail.module.css';
 import {
     getRuntimeProjectById,
@@ -8,6 +10,7 @@ import {
 import { buildWhatsappUrl, normalizeWhatsappNumber } from '../../lib/siteUtils';
 
 export default function ProjectDetailPage({ project, settings }) {
+    const [selectedImage, setSelectedImage] = useState(null);
     const whatsappNumber = normalizeWhatsappNumber(settings?.whatsapp);
     const similarProjectLink = buildWhatsappUrl(whatsappNumber, 'أريد مشروع مشابه');
 
@@ -34,7 +37,14 @@ export default function ProjectDetailPage({ project, settings }) {
 
             <div className={styles.page}>
                 {/* Hero */}
-                <div className={styles.hero}>
+                <div
+                    className={styles.hero}
+                    style={project.images && project.images[0] ? {
+                        backgroundImage: `url(${project.images[0]})`,
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center'
+                    } : {}}
+                >
                     <div className={styles.heroOverlay} />
                     <div className={`container ${styles.heroContent}`}>
                         <span className={styles.category}>{project.category}</span>
@@ -55,10 +65,16 @@ export default function ProjectDetailPage({ project, settings }) {
                                 {/* Image Gallery */}
                                 <div className={styles.gallery}>
                                     {project.images && project.images.map((img, i) => (
-                                        <div key={i} className={styles.imageSlot}>
-                                            <div className={styles.imagePlaceholder}>
-                                                <span>صورة {i + 1}</span>
-                                            </div>
+                                        <div
+                                            key={i}
+                                            className={styles.imageSlot}
+                                            onClick={() => setSelectedImage(img)}
+                                        >
+                                            <img
+                                                src={img}
+                                                alt={`${project.title} - ${i + 1}`}
+                                                className={styles.galleryImage}
+                                            />
                                         </div>
                                     ))}
                                 </div>
@@ -93,6 +109,35 @@ export default function ProjectDetailPage({ project, settings }) {
                     </div>
                 </section>
             </div>
+
+            {/* Lightbox */}
+            <AnimatePresence>
+                {selectedImage && (
+                    <motion.div
+                        className={styles.lightbox}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        onClick={() => setSelectedImage(null)}
+                    >
+                        <motion.div
+                            className={styles.lightboxContent}
+                            initial={{ scale: 0.8 }}
+                            animate={{ scale: 1 }}
+                            exit={{ scale: 0.8 }}
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            <img src={selectedImage} alt="Large view" className={styles.lightboxImage} />
+                            <button
+                                className={styles.closeLightbox}
+                                onClick={() => setSelectedImage(null)}
+                            >
+                                &times;
+                            </button>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </>
     );
 }

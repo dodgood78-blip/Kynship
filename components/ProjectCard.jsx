@@ -5,9 +5,17 @@ export default function ProjectCard({ project }) {
     return (
         <Link href={`/portfolio/${project.id}`} className={styles.card}>
             <div className={styles.imageWrap}>
-                <div className={styles.placeholder}>
-                    <span className={styles.categoryBadge}>{project.category}</span>
-                </div>
+                {project.images && project.images[0] ? (
+                    <img
+                        src={project.images[0]}
+                        alt={project.title}
+                        className={styles.cardImage}
+                    />
+                ) : (
+                    <div className={styles.placeholder}>
+                        <span className={styles.categoryBadge}>{project.category}</span>
+                    </div>
+                )}
                 <div className={styles.overlay} />
             </div>
             <div className={styles.info}>
