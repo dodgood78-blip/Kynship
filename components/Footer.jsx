@@ -11,7 +11,6 @@ const AR = {
     home: '\u0627\u0644\u0631\u0626\u064a\u0633\u064a\u0629',
     portfolio: '\u0623\u0639\u0645\u0627\u0644\u0646\u0627',
     contact: '\u062a\u0648\u0627\u0635\u0644 \u0645\u0639\u0646\u0627',
-    admin: '\u0644\u0648\u062d\u0629 \u0627\u0644\u0625\u062f\u0627\u0631\u0629',
     contactTitle: '\u062a\u0648\u0627\u0635\u0644 \u0645\u0639\u0646\u0627',
     follow: '\u062a\u0627\u0628\u0639\u0646\u0627',
     rights: '\u062c\u0645\u064a\u0639 \u0627\u0644\u062d\u0642\u0648\u0642 \u0645\u062d\u0641\u0648\u0638\u0629.',
@@ -42,7 +41,6 @@ export default function Footer({ settings }) {
                     <Link href="/">{AR.home}</Link>
                     <Link href="/portfolio">{AR.portfolio}</Link>
                     <Link href="/contact">{AR.contact}</Link>
-                    <a href="/admin">{AR.admin}</a>
                 </div>
 
                 <div className={styles.contact}>
