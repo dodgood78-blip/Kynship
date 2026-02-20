@@ -56,6 +56,14 @@ export default function Header({ settings }) {
             <div className={`container ${styles.inner}`}>
                 <div className={styles.rightSide}>
                     <a
+                        href={bookLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`btn-gold ${styles.desktopSideCta}`}
+                    >
+                        {AR_LABELS.bookFree}
+                    </a>
+                    <a
                         href={whatsappLink}
                         target="_blank"
                         rel="noopener noreferrer"
@@ -89,14 +97,6 @@ export default function Header({ settings }) {
                                 {link.label}
                             </Link>
                         ))}
-                        <a
-                            href={bookLink}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className={`btn-gold ${styles.desktopCta}`}
-                        >
-                            {AR_LABELS.bookFree}
-                        </a>
                     </nav>
 
                     <button
