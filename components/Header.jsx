@@ -4,8 +4,23 @@ import { FiMenu, FiX } from 'react-icons/fi';
 import { FaWhatsapp } from 'react-icons/fa';
 import styles from './Header.module.css';
 
+const MOBILE_MENU_MAX_WIDTH = 1024;
+const WHATSAPP_LINK = 'https://wa.me/201000000000';
+const BOOK_LINK =
+    'https://wa.me/201000000000?text=%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%AD%D8%AC%D8%B2%20%D9%85%D8%B9%D8%A7%D9%8A%D9%86%D8%A9';
+
+const AR_LABELS = {
+    home: '\u0627\u0644\u0631\u0626\u064a\u0633\u064a\u0629',
+    portfolio: '\u0623\u0639\u0645\u0627\u0644\u0646\u0627',
+    contact: '\u062a\u0648\u0627\u0635\u0644 \u0645\u0639\u0646\u0627',
+    logo: '\u0643\u064a\u0646\u0634\u064a\u0628',
+    whatsapp: '\u0648\u0627\u062a\u0633\u0627\u0628',
+    menu: '\u0627\u0644\u0642\u0627\u0626\u0645\u0629',
+    book: '\u0627\u062d\u062c\u0632 \u0645\u0639\u0627\u064a\u0646\u0629',
+    bookFree: '\u0627\u062d\u062c\u0632 \u0645\u0639\u0627\u064a\u0646\u0629 \u0645\u062c\u0627\u0646\u064a\u0629',
+};
+
 export default function Header() {
-    const mobileMenuMaxWidth = 1024;
     const [scrolled, setScrolled] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
 
@@ -17,7 +32,7 @@ export default function Header() {
 
     useEffect(() => {
         const handleResize = () => {
-            if (window.innerWidth > mobileMenuMaxWidth) {
+            if (window.innerWidth > MOBILE_MENU_MAX_WIDTH) {
                 setMenuOpen(false);
             }
         };
@@ -28,59 +43,72 @@ export default function Header() {
     }, []);
 
     const navLinks = [
-        { href: '/', label: 'الرئيسية' },
-        { href: '/portfolio', label: 'أعمالنا' },
-        { href: '/contact', label: 'تواصل معنا' },
+        { href: '/', label: AR_LABELS.home },
+        { href: '/portfolio', label: AR_LABELS.portfolio },
+        { href: '/contact', label: AR_LABELS.contact },
     ];
 
     return (
         <header className={`${styles.header} ${scrolled ? styles.scrolled : ''}`}>
             <div className={`container ${styles.inner}`}>
-                {/* Right side: WhatsApp + Book Button */}
                 <div className={styles.rightSide}>
                     <a
-                        href="https://wa.me/201000000000"
+                        href={WHATSAPP_LINK}
                         target="_blank"
                         rel="noopener noreferrer"
                         className={styles.whatsappBtn}
-                        aria-label="واتساب"
+                        aria-label={AR_LABELS.whatsapp}
                     >
                         <FaWhatsapp size={22} />
                     </a>
                     <a
-                        href="https://wa.me/201000000000?text=أريد حجز معاينة"
+                        href={BOOK_LINK}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="btn-gold"
+                        className={`btn-gold ${styles.topCta}`}
                         style={{ padding: '10px 20px', fontSize: '0.88rem' }}
                     >
-                        احجز معاينة
+                        {AR_LABELS.book}
                     </a>
                 </div>
 
-                {/* Center: Logo */}
                 <div className={styles.logo}>
                     <Link href="/">
                         <span className={styles.logoText}>Kynship</span>
-                        <span className={styles.logoAr}>كينشيب</span>
+                        <span className={styles.logoAr}>{AR_LABELS.logo}</span>
                     </Link>
                 </div>
 
-                {/* Left side: Menu */}
                 <div className={styles.leftSide}>
-                    <button type="button"
+                    <nav className={styles.desktopNav} aria-label="Main">
+                        {navLinks.map((link) => (
+                            <Link key={link.href} href={link.href} className={styles.desktopNavLink}>
+                                {link.label}
+                            </Link>
+                        ))}
+                        <a
+                            href={BOOK_LINK}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={`btn-gold ${styles.desktopCta}`}
+                        >
+                            {AR_LABELS.bookFree}
+                        </a>
+                    </nav>
+
+                    <button
+                        type="button"
                         className={styles.menuBtn}
                         onClick={() => setMenuOpen(!menuOpen)}
                         aria-expanded={menuOpen}
                         aria-controls="mobile-nav"
-                        aria-label="القائمة"
+                        aria-label={AR_LABELS.menu}
                     >
                         {menuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
                     </button>
                 </div>
             </div>
 
-            {/* Mobile / Slide-out Nav */}
             <nav id="mobile-nav" className={`${styles.nav} ${menuOpen ? styles.navOpen : ''}`}>
                 <div className={styles.navInner}>
                     {navLinks.map((link) => (
@@ -95,19 +123,18 @@ export default function Header() {
                     ))}
                     <div className={styles.navDivider} />
                     <a
-                        href="https://wa.me/201000000000?text=أريد حجز معاينة"
+                        href={BOOK_LINK}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="btn-gold"
                         onClick={() => setMenuOpen(false)}
                     >
-                        احجز معاينة مجانية
+                        {AR_LABELS.bookFree}
                     </a>
                 </div>
             </nav>
-            {menuOpen && (
-                <div className={styles.backdrop} onClick={() => setMenuOpen(false)} />
-            )}
+
+            {menuOpen && <div className={styles.backdrop} onClick={() => setMenuOpen(false)} />}
         </header>
     );
 }

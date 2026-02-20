@@ -74,6 +74,34 @@
 .leftSide {
     display: flex;
     align-items: center;
+    gap: 20px;
+}
+
+.desktopNav {
+    display: none;
+    align-items: center;
+    gap: 22px;
+}
+
+.desktopNavLink {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--charcoal);
+    transition: var(--transition);
+}
+
+.desktopNavLink:hover {
+    color: var(--gold);
+}
+
+.topCta {
+    display: inline-flex;
+}
+
+.desktopCta {
+    display: none;
+    padding: 10px 18px;
+    font-size: 0.84rem;
 }
 
 .menuBtn {
@@ -147,8 +175,16 @@
 }
 
 @media (min-width: 1025px) {
-    .leftSide {
-        width: 42px;
+    .desktopNav {
+        display: flex;
+    }
+
+    .topCta {
+        display: none;
+    }
+
+    .desktopCta {
+        display: inline-flex;
     }
 
     .menuBtn,
