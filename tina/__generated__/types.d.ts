@@ -472,6 +472,9 @@ export type Settings = Node & Document & {
   whatsapp?: Maybe<Scalars['String']['output']>;
   instagram?: Maybe<Scalars['String']['output']>;
   facebook?: Maybe<Scalars['String']['output']>;
+  tiktok?: Maybe<Scalars['String']['output']>;
+  twitter?: Maybe<Scalars['String']['output']>;
+  pinterest?: Maybe<Scalars['String']['output']>;
   goldColor?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
@@ -486,6 +489,9 @@ export type SettingsFilter = {
   whatsapp?: InputMaybe<StringFilter>;
   instagram?: InputMaybe<StringFilter>;
   facebook?: InputMaybe<StringFilter>;
+  tiktok?: InputMaybe<StringFilter>;
+  twitter?: InputMaybe<StringFilter>;
+  pinterest?: InputMaybe<StringFilter>;
   goldColor?: InputMaybe<StringFilter>;
 };
 
@@ -704,6 +710,9 @@ export type SettingsMutation = {
   whatsapp?: InputMaybe<Scalars['String']['input']>;
   instagram?: InputMaybe<Scalars['String']['input']>;
   facebook?: InputMaybe<Scalars['String']['input']>;
+  tiktok?: InputMaybe<Scalars['String']['input']>;
+  twitter?: InputMaybe<Scalars['String']['input']>;
+  pinterest?: InputMaybe<Scalars['String']['input']>;
   goldColor?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -713,7 +722,7 @@ export type ProjectPartsFragment = { __typename: 'Project', title: string, descr
 
 export type ReviewPartsFragment = { __typename: 'Review', name: string, location?: string | null, rating?: number | null, quote?: string | null };
 
-export type SettingsPartsFragment = { __typename: 'Settings', brandName?: string | null, phone?: string | null, email?: string | null, location?: string | null, whatsapp?: string | null, instagram?: string | null, facebook?: string | null, goldColor?: string | null };
+export type SettingsPartsFragment = { __typename: 'Settings', brandName?: string | null, phone?: string | null, email?: string | null, location?: string | null, whatsapp?: string | null, instagram?: string | null, facebook?: string | null, tiktok?: string | null, twitter?: string | null, pinterest?: string | null, goldColor?: string | null };
 
 export type HomepageQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -777,7 +786,7 @@ export type SettingsQueryVariables = Exact<{
 }>;
 
 
-export type SettingsQuery = { __typename?: 'Query', settings: { __typename: 'Settings', id: string, brandName?: string | null, phone?: string | null, email?: string | null, location?: string | null, whatsapp?: string | null, instagram?: string | null, facebook?: string | null, goldColor?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type SettingsQuery = { __typename?: 'Query', settings: { __typename: 'Settings', id: string, brandName?: string | null, phone?: string | null, email?: string | null, location?: string | null, whatsapp?: string | null, instagram?: string | null, facebook?: string | null, tiktok?: string | null, twitter?: string | null, pinterest?: string | null, goldColor?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
 
 export type SettingsConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -789,7 +798,7 @@ export type SettingsConnectionQueryVariables = Exact<{
 }>;
 
 
-export type SettingsConnectionQuery = { __typename?: 'Query', settingsConnection: { __typename?: 'SettingsConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'SettingsConnectionEdges', cursor: string, node?: { __typename: 'Settings', id: string, brandName?: string | null, phone?: string | null, email?: string | null, location?: string | null, whatsapp?: string | null, instagram?: string | null, facebook?: string | null, goldColor?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type SettingsConnectionQuery = { __typename?: 'Query', settingsConnection: { __typename?: 'SettingsConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'SettingsConnectionEdges', cursor: string, node?: { __typename: 'Settings', id: string, brandName?: string | null, phone?: string | null, email?: string | null, location?: string | null, whatsapp?: string | null, instagram?: string | null, facebook?: string | null, tiktok?: string | null, twitter?: string | null, pinterest?: string | null, goldColor?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export const HomepagePartsFragmentDoc = gql`
     fragment HomepageParts on Homepage {
@@ -881,6 +890,9 @@ export const SettingsPartsFragmentDoc = gql`
   whatsapp
   instagram
   facebook
+  tiktok
+  twitter
+  pinterest
   goldColor
 }
     `;

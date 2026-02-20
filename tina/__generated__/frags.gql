@@ -84,5 +84,8 @@ fragment SettingsParts on Settings {
   whatsapp
   instagram
   facebook
+  tiktok
+  twitter
+  pinterest
   goldColor
 }

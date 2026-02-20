@@ -95,6 +95,9 @@ export const SettingsPartsFragmentDoc = gql`
   whatsapp
   instagram
   facebook
+  tiktok
+  twitter
+  pinterest
   goldColor
 }
     `;

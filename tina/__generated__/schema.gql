@@ -332,6 +332,9 @@ type Settings implements Node & Document {
   whatsapp: String
   instagram: String
   facebook: String
+  tiktok: String
+  twitter: String
+  pinterest: String
   goldColor: String
   id: ID!
   _sys: SystemInfo!
@@ -346,6 +349,9 @@ input SettingsFilter {
   whatsapp: StringFilter
   instagram: StringFilter
   facebook: StringFilter
+  tiktok: StringFilter
+  twitter: StringFilter
+  pinterest: StringFilter
   goldColor: StringFilter
 }
 
@@ -480,6 +486,9 @@ input SettingsMutation {
   whatsapp: String
   instagram: String
   facebook: String
+  tiktok: String
+  twitter: String
+  pinterest: String
   goldColor: String
 }
 

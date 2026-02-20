@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import { FaWhatsapp, FaInstagram, FaFacebookF, FaTiktok } from 'react-icons/fa';
+import { FaWhatsapp, FaInstagram, FaFacebookF, FaTiktok, FaPinterest } from 'react-icons/fa';
+import { FaXTwitter } from 'react-icons/fa6';
 import { MdLocationOn, MdPhone, MdEmail } from 'react-icons/md';
 import { buildWhatsappUrl, normalizeWhatsappNumber } from '../lib/siteUtils';
 import styles from './Footer.module.css';
@@ -26,6 +27,9 @@ export default function Footer({ settings }) {
     const whatsappUrl = buildWhatsappUrl(normalizeWhatsappNumber(settings?.whatsapp));
     const instagram = settings?.instagram || 'https://instagram.com';
     const facebook = settings?.facebook || 'https://facebook.com';
+    const tiktok = settings?.tiktok;
+    const twitter = settings?.twitter;
+    const pinterest = settings?.pinterest;
 
     return (
         <footer className={styles.footer}>
@@ -71,7 +75,21 @@ export default function Footer({ settings }) {
                         <a href={facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook">
                             <FaFacebookF size={20} />
                         </a>
-
+                        {tiktok && (
+                            <a href={tiktok} target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+                                <FaTiktok size={20} />
+                            </a>
+                        )}
+                        {twitter && (
+                            <a href={twitter} target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
+                                <FaXTwitter size={20} />
+                            </a>
+                        )}
+                        {pinterest && (
+                            <a href={pinterest} target="_blank" rel="noopener noreferrer" aria-label="Pinterest">
+                                <FaPinterest size={20} />
+                            </a>
+                        )}
                     </div>
                 </div>
             </div>
