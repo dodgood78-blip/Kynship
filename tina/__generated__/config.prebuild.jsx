@@ -169,7 +169,7 @@ var config_default = defineConfig({
             label: "Completion Date"
           },
           {
-            type: "string",
+            type: "image",
             name: "images",
             label: "Images",
             list: true
