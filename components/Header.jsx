@@ -5,6 +5,7 @@ import { FaWhatsapp } from 'react-icons/fa';
 import styles from './Header.module.css';
 
 export default function Header() {
+    const mobileMenuMaxWidth = 1024;
     const [scrolled, setScrolled] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
 
@@ -12,6 +13,18 @@ export default function Header() {
         const handleScroll = () => setScrolled(window.scrollY > 20);
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth > mobileMenuMaxWidth) {
+                setMenuOpen(false);
+            }
+        };
+
+        handleResize();
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
     }, []);
 
     const navLinks = [
@@ -55,9 +68,11 @@ export default function Header() {
 
                 {/* Left side: Menu */}
                 <div className={styles.leftSide}>
-                    <button
+                    <button type="button"
                         className={styles.menuBtn}
                         onClick={() => setMenuOpen(!menuOpen)}
+                        aria-expanded={menuOpen}
+                        aria-controls="mobile-nav"
                         aria-label="القائمة"
                     >
                         {menuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
@@ -66,7 +81,7 @@ export default function Header() {
             </div>
 
             {/* Mobile / Slide-out Nav */}
-            <nav className={`${styles.nav} ${menuOpen ? styles.navOpen : ''}`}>
+            <nav id="mobile-nav" className={`${styles.nav} ${menuOpen ? styles.navOpen : ''}`}>
                 <div className={styles.navInner}>
                     {navLinks.map((link) => (
                         <Link

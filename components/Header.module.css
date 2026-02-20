@@ -146,6 +146,18 @@
     animation: fadeIn 0.3s ease;
 }
 
+@media (min-width: 1025px) {
+    .leftSide {
+        width: 42px;
+    }
+
+    .menuBtn,
+    .nav,
+    .backdrop {
+        display: none;
+    }
+}
+
 @media (max-width: 480px) {
     .nav {
         width: 100%;
