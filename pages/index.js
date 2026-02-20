@@ -1,3 +1,5 @@
+import fs from 'fs';
+import path from 'path';
 import Head from 'next/head';
 import HeroSection from '../components/HeroSection';
 import CategoriesSection from '../components/CategoriesSection';
@@ -6,7 +8,84 @@ import StudioSection from '../components/StudioSection';
 import ReviewsSection from '../components/ReviewsSection';
 import CTASection from '../components/CTASection';
 
-export default function HomePage() {
+const defaultHomeContent = {
+    hero: {
+        badge: 'مطابخ وغرف ملابس فاخرة',
+        headline: 'نصمم مساحتك',
+        accent: 'بدقة في كل تفصيلة.',
+        subtext: 'مطابخ وغرف ملابس بتصميم مخصص وجودة تدوم.',
+        primaryCtaText: 'اطلب معاينة مجانية',
+        primaryCtaLink: 'https://wa.me/201000000000?text=أريد طلب معاينة مجانية',
+        secondaryCtaText: 'استكشف أعمالنا',
+        secondaryCtaLink: '/portfolio',
+        backgroundImage: '/images/hero-kitchen.jpg',
+    },
+    categories: {
+        label: 'تخصصاتنا',
+        title: 'خدماتنا',
+        subtitle: 'نقدم حلولًا متكاملة لتصميم وتنفيذ مساحاتك الداخلية بأعلى معايير الجودة.',
+        items: [],
+    },
+    trust: {
+        label: 'لماذا كينشيب',
+        title: 'مميزاتنا',
+        items: [],
+    },
+    studio: {
+        label: 'استوديو التصميم',
+        title: 'Kynship Design Studio',
+        text: '',
+        features: [],
+        ctaText: 'احجز استشارة الآن',
+        ctaLink: 'https://wa.me/201000000000?text=أريد حجز استشارة تصميم',
+    },
+    cta: {
+        label: 'ابدأ رحلتك معنا',
+        title: 'جاهز تبدأ مشروعك؟',
+        subtitle: 'نحن هنا لنحول أفكارك إلى واقع. تواصل معنا اليوم للحصول على استشارة مجانية.',
+        primaryText: 'تواصل معنا الآن',
+        primaryLink: 'https://wa.me/201000000000?text=أريد التواصل معكم',
+        secondaryText: 'أرسل رسالة',
+        secondaryLink: '/contact',
+    },
+};
+
+function mergeContent(defaultContent, storedContent) {
+    return {
+        ...defaultContent,
+        ...storedContent,
+        hero: { ...defaultContent.hero, ...(storedContent?.hero || {}) },
+        categories: {
+            ...defaultContent.categories,
+            ...(storedContent?.categories || {}),
+            items:
+                Array.isArray(storedContent?.categories?.items) &&
+                storedContent.categories.items.length > 0
+                    ? storedContent.categories.items
+                    : defaultContent.categories.items,
+        },
+        trust: {
+            ...defaultContent.trust,
+            ...(storedContent?.trust || {}),
+            items:
+                Array.isArray(storedContent?.trust?.items) && storedContent.trust.items.length > 0
+                    ? storedContent.trust.items
+                    : defaultContent.trust.items,
+        },
+        studio: {
+            ...defaultContent.studio,
+            ...(storedContent?.studio || {}),
+            features:
+                Array.isArray(storedContent?.studio?.features) &&
+                storedContent.studio.features.length > 0
+                    ? storedContent.studio.features
+                    : defaultContent.studio.features,
+        },
+        cta: { ...defaultContent.cta, ...(storedContent?.cta || {}) },
+    };
+}
+
+export default function HomePage({ homeContent }) {
     return (
         <>
             <Head>
@@ -26,12 +105,33 @@ export default function HomePage() {
                 <link rel="canonical" href="https://kynship.com" />
             </Head>
 
-            <HeroSection />
-            <CategoriesSection />
-            <TrustSection />
-            <StudioSection />
+            <HeroSection data={homeContent.hero} />
+            <CategoriesSection data={homeContent.categories} />
+            <TrustSection data={homeContent.trust} />
+            <StudioSection data={homeContent.studio} />
             <ReviewsSection />
-            <CTASection />
+            <CTASection data={homeContent.cta} />
         </>
     );
+}
+
+export async function getStaticProps() {
+    const homepagePath = path.join(process.cwd(), 'content', 'homepage', 'index.json');
+    let homeContent = defaultHomeContent;
+
+    try {
+        if (fs.existsSync(homepagePath)) {
+            const raw = fs.readFileSync(homepagePath, 'utf-8');
+            const parsed = JSON.parse(raw);
+            homeContent = mergeContent(defaultHomeContent, parsed);
+        }
+    } catch (error) {
+        console.error('Error reading homepage content:', error);
+    }
+
+    return {
+        props: {
+            homeContent,
+        },
+    };
 }

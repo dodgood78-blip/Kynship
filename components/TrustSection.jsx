@@ -1,44 +1,50 @@
 import styles from './TrustSection.module.css';
 
-const trustItems = [
-    {
-        id: 1,
-        icon: '🏗️',
-        title: 'تصميم 3D قبل التنفيذ',
-        desc: 'نقدم لك رؤية كاملة بالتفاصيل قبل البدء في التنفيذ',
-    },
-    {
-        id: 2,
-        icon: '🔍',
-        title: 'معاينة مجانية',
-        desc: 'فريقنا يزورك في المنزل لتقييم المساحة ووضع أفضل الحلول',
-    },
-    {
-        id: 3,
-        icon: '✅',
-        title: 'ضمان على الخامات',
-        desc: 'نستخدم أجود الخامات مع ضمان شامل يطمئنك على استثمارك',
-    },
-    {
-        id: 4,
-        icon: '🛠️',
-        title: 'خدمة ما بعد البيع',
-        desc: 'دعم فني متواصل وصيانة دورية لضمان سلامة منتجاتك',
-    },
-];
+const defaultData = {
+    label: 'لماذا كينشيب',
+    title: 'مميزاتنا',
+    items: [
+        {
+            icon: '🏗️',
+            title: 'تصميم 3D قبل التنفيذ',
+            desc: 'نقدم لك رؤية كاملة بالتفاصيل قبل البدء في التنفيذ.',
+        },
+        {
+            icon: '🔍',
+            title: 'معاينة مجانية',
+            desc: 'فريقنا يزورك لتقييم المساحة ووضع أفضل الحلول.',
+        },
+        {
+            icon: '✅',
+            title: 'ضمان على الخامات',
+            desc: 'نستخدم أجود الخامات مع ضمان شامل يضمن ثقتك.',
+        },
+        {
+            icon: '🛠️',
+            title: 'خدمة ما بعد البيع',
+            desc: 'دعم فني مستمر وصيانة دورية بعد التسليم.',
+        },
+    ],
+};
 
-export default function TrustSection() {
+export default function TrustSection({ data = {} }) {
+    const content = {
+        ...defaultData,
+        ...data,
+        items: Array.isArray(data.items) && data.items.length > 0 ? data.items : defaultData.items,
+    };
+
     return (
         <section className={`section ${styles.section}`}>
             <div className="container">
                 <div className={styles.header}>
-                    <span className="section-label">لماذا كينشيب</span>
-                    <h2 className="section-title">مميزاتنا</h2>
+                    <span className="section-label">{content.label}</span>
+                    <h2 className="section-title">{content.title}</h2>
                     <div className="gold-divider" />
                 </div>
                 <div className={styles.grid}>
-                    {trustItems.map((item) => (
-                        <div key={item.id} className={styles.card}>
+                    {content.items.map((item, index) => (
+                        <div key={`${item.title}-${index}`} className={styles.card}>
                             <div className={styles.iconWrap}>
                                 <span className={styles.icon}>{item.icon}</span>
                             </div>

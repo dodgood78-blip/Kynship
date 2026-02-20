@@ -19,164 +19,219 @@ export default defineConfig({
 
     schema: {
         collections: [
-            // ── HOMEPAGE ────────────────────────────────────────────────
             {
                 name: 'homepage',
-                label: 'الصفحة الرئيسية',
+                label: 'Homepage',
                 path: 'content/homepage',
                 format: 'json',
                 ui: {
-                    allowedActions: { create: false, delete: false },
                     global: true,
+                    allowedActions: { create: false, delete: false },
+                    filename: {
+                        readonly: true,
+                        slugify: () => 'index',
+                    },
                 },
                 fields: [
                     {
-                        type: 'string',
-                        name: 'heroHeadline',
-                        label: 'عنوان القسم الرئيسي',
+                        type: 'object',
+                        name: 'hero',
+                        label: 'Hero Section',
+                        fields: [
+                            { type: 'string', name: 'badge', label: 'Badge' },
+                            { type: 'string', name: 'headline', label: 'Headline' },
+                            { type: 'string', name: 'accent', label: 'Headline Accent' },
+                            { type: 'string', name: 'subtext', label: 'Subtext' },
+                            { type: 'string', name: 'primaryCtaText', label: 'Primary CTA Text' },
+                            { type: 'string', name: 'primaryCtaLink', label: 'Primary CTA Link' },
+                            { type: 'string', name: 'secondaryCtaText', label: 'Secondary CTA Text' },
+                            { type: 'string', name: 'secondaryCtaLink', label: 'Secondary CTA Link' },
+                            { type: 'image', name: 'backgroundImage', label: 'Background Image' },
+                        ],
                     },
                     {
-                        type: 'string',
-                        name: 'heroSubtext',
-                        label: 'النص الفرعي',
+                        type: 'object',
+                        name: 'categories',
+                        label: 'Categories Section',
+                        fields: [
+                            { type: 'string', name: 'label', label: 'Section Label' },
+                            { type: 'string', name: 'title', label: 'Section Title' },
+                            { type: 'string', name: 'subtitle', label: 'Section Subtitle' },
+                            {
+                                type: 'object',
+                                name: 'items',
+                                label: 'Category Items',
+                                list: true,
+                                fields: [
+                                    { type: 'string', name: 'title', label: 'Title' },
+                                    { type: 'string', name: 'subtitle', label: 'Subtitle' },
+                                    { type: 'string', name: 'href', label: 'Link' },
+                                    { type: 'string', name: 'bg', label: 'Fallback Background Color (Hex)' },
+                                    { type: 'image', name: 'image', label: 'Image' },
+                                ],
+                            },
+                        ],
                     },
                     {
-                        type: 'string',
-                        name: 'heroCTAPrimary',
-                        label: 'نص الزر الرئيسي',
+                        type: 'object',
+                        name: 'trust',
+                        label: 'Trust Section',
+                        fields: [
+                            { type: 'string', name: 'label', label: 'Section Label' },
+                            { type: 'string', name: 'title', label: 'Section Title' },
+                            {
+                                type: 'object',
+                                name: 'items',
+                                label: 'Trust Items',
+                                list: true,
+                                fields: [
+                                    { type: 'string', name: 'icon', label: 'Icon (emoji/text)' },
+                                    { type: 'string', name: 'title', label: 'Title' },
+                                    {
+                                        type: 'string',
+                                        name: 'desc',
+                                        label: 'Description',
+                                        ui: { component: 'textarea' },
+                                    },
+                                ],
+                            },
+                        ],
                     },
                     {
-                        type: 'string',
-                        name: 'heroCTASecondary',
-                        label: 'نص الزر الثانوي',
+                        type: 'object',
+                        name: 'studio',
+                        label: 'Studio Section',
+                        fields: [
+                            { type: 'string', name: 'label', label: 'Section Label' },
+                            { type: 'string', name: 'title', label: 'Section Title' },
+                            {
+                                type: 'string',
+                                name: 'text',
+                                label: 'Description',
+                                ui: { component: 'textarea' },
+                            },
+                            {
+                                type: 'string',
+                                name: 'features',
+                                label: 'Feature List',
+                                list: true,
+                            },
+                            { type: 'string', name: 'ctaText', label: 'CTA Text' },
+                            { type: 'string', name: 'ctaLink', label: 'CTA Link' },
+                        ],
+                    },
+                    {
+                        type: 'object',
+                        name: 'cta',
+                        label: 'Bottom CTA Section',
+                        fields: [
+                            { type: 'string', name: 'label', label: 'Section Label' },
+                            { type: 'string', name: 'title', label: 'Section Title' },
+                            {
+                                type: 'string',
+                                name: 'subtitle',
+                                label: 'Section Subtitle',
+                                ui: { component: 'textarea' },
+                            },
+                            { type: 'string', name: 'primaryText', label: 'Primary Button Text' },
+                            { type: 'string', name: 'primaryLink', label: 'Primary Button Link' },
+                            { type: 'string', name: 'secondaryText', label: 'Secondary Button Text' },
+                            { type: 'string', name: 'secondaryLink', label: 'Secondary Button Link' },
+                        ],
                     },
                 ],
             },
-
-            // ── PROJECTS ────────────────────────────────────────────────
             {
                 name: 'project',
-                label: 'المشاريع',
+                label: 'Projects',
                 path: 'content/projects',
                 format: 'json',
                 fields: [
                     {
                         type: 'string',
                         name: 'title',
-                        label: 'عنوان المشروع',
+                        label: 'Project Title',
                         isTitle: true,
                         required: true,
                     },
                     {
                         type: 'string',
                         name: 'description',
-                        label: 'وصف المشروع',
+                        label: 'Description',
                         ui: { component: 'textarea' },
                     },
                     {
                         type: 'string',
                         name: 'category',
-                        label: 'الفئة',
+                        label: 'Category',
                         options: ['مطابخ', 'غرف ملابس', 'وحدات تلفزيون', 'تصميمات خاصة'],
                     },
                     {
                         type: 'string',
                         name: 'completionDate',
-                        label: 'تاريخ الإنجاز',
+                        label: 'Completion Date',
                     },
                     {
                         type: 'string',
                         name: 'images',
-                        label: 'الصور',
+                        label: 'Images',
                         list: true,
                     },
                 ],
             },
-
-            // ── REVIEWS ─────────────────────────────────────────────────
             {
                 name: 'review',
-                label: 'آراء العملاء',
+                label: 'Reviews',
                 path: 'content/reviews',
                 format: 'json',
                 fields: [
                     {
                         type: 'string',
                         name: 'name',
-                        label: 'اسم العميل',
+                        label: 'Client Name',
                         isTitle: true,
                         required: true,
                     },
                     {
                         type: 'string',
                         name: 'location',
-                        label: 'الموقع',
+                        label: 'Location',
                     },
                     {
                         type: 'number',
                         name: 'rating',
-                        label: 'التقييم (1-5)',
+                        label: 'Rating (1-5)',
                     },
                     {
                         type: 'string',
                         name: 'quote',
-                        label: 'التعليق',
+                        label: 'Quote',
                         ui: { component: 'textarea' },
                     },
                 ],
             },
-
-            // ── SETTINGS ────────────────────────────────────────────────
             {
                 name: 'settings',
-                label: 'إعدادات الموقع',
+                label: 'Settings',
                 path: 'content/settings',
                 format: 'json',
                 ui: {
-                    allowedActions: { create: false, delete: false },
                     global: true,
+                    allowedActions: { create: false, delete: false },
+                    filename: {
+                        readonly: true,
+                        slugify: () => 'index',
+                    },
                 },
                 fields: [
-                    {
-                        type: 'string',
-                        name: 'brandName',
-                        label: 'اسم العلامة التجارية',
-                    },
-                    {
-                        type: 'string',
-                        name: 'phone',
-                        label: 'رقم الهاتف',
-                    },
-                    {
-                        type: 'string',
-                        name: 'email',
-                        label: 'البريد الإلكتروني',
-                    },
-                    {
-                        type: 'string',
-                        name: 'location',
-                        label: 'العنوان',
-                    },
-                    {
-                        type: 'string',
-                        name: 'whatsapp',
-                        label: 'رقم الواتساب (بالكود الدولي)',
-                    },
-                    {
-                        type: 'string',
-                        name: 'instagram',
-                        label: 'رابط إنستقرام',
-                    },
-                    {
-                        type: 'string',
-                        name: 'facebook',
-                        label: 'رابط فيسبوك',
-                    },
-                    {
-                        type: 'string',
-                        name: 'goldColor',
-                        label: 'اللون الذهبي الرئيسي',
-                    },
+                    { type: 'string', name: 'brandName', label: 'Brand Name' },
+                    { type: 'string', name: 'phone', label: 'Phone' },
+                    { type: 'string', name: 'email', label: 'Email' },
+                    { type: 'string', name: 'location', label: 'Location' },
+                    { type: 'string', name: 'whatsapp', label: 'WhatsApp Number' },
+                    { type: 'string', name: 'instagram', label: 'Instagram Link' },
+                    { type: 'string', name: 'facebook', label: 'Facebook Link' },
+                    { type: 'string', name: 'goldColor', label: 'Accent Color' },
                 ],
             },
         ],
