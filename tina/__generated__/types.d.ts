@@ -219,12 +219,78 @@ export type CollectionDocumentsArgs = {
 
 export type DocumentNode = Homepage | Project | Review | Settings | Folder;
 
+export type HomepageHero = {
+  __typename?: 'HomepageHero';
+  badge?: Maybe<Scalars['String']['output']>;
+  headline?: Maybe<Scalars['String']['output']>;
+  accent?: Maybe<Scalars['String']['output']>;
+  subtext?: Maybe<Scalars['String']['output']>;
+  primaryCtaText?: Maybe<Scalars['String']['output']>;
+  primaryCtaLink?: Maybe<Scalars['String']['output']>;
+  secondaryCtaText?: Maybe<Scalars['String']['output']>;
+  secondaryCtaLink?: Maybe<Scalars['String']['output']>;
+  backgroundImage?: Maybe<Scalars['String']['output']>;
+};
+
+export type HomepageCategoriesItems = {
+  __typename?: 'HomepageCategoriesItems';
+  title?: Maybe<Scalars['String']['output']>;
+  subtitle?: Maybe<Scalars['String']['output']>;
+  href?: Maybe<Scalars['String']['output']>;
+  bg?: Maybe<Scalars['String']['output']>;
+  image?: Maybe<Scalars['String']['output']>;
+};
+
+export type HomepageCategories = {
+  __typename?: 'HomepageCategories';
+  label?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  subtitle?: Maybe<Scalars['String']['output']>;
+  items?: Maybe<Array<Maybe<HomepageCategoriesItems>>>;
+};
+
+export type HomepageTrustItems = {
+  __typename?: 'HomepageTrustItems';
+  icon?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  desc?: Maybe<Scalars['String']['output']>;
+};
+
+export type HomepageTrust = {
+  __typename?: 'HomepageTrust';
+  label?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  items?: Maybe<Array<Maybe<HomepageTrustItems>>>;
+};
+
+export type HomepageStudio = {
+  __typename?: 'HomepageStudio';
+  label?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  text?: Maybe<Scalars['String']['output']>;
+  features?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  ctaText?: Maybe<Scalars['String']['output']>;
+  ctaLink?: Maybe<Scalars['String']['output']>;
+};
+
+export type HomepageCta = {
+  __typename?: 'HomepageCta';
+  label?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  subtitle?: Maybe<Scalars['String']['output']>;
+  primaryText?: Maybe<Scalars['String']['output']>;
+  primaryLink?: Maybe<Scalars['String']['output']>;
+  secondaryText?: Maybe<Scalars['String']['output']>;
+  secondaryLink?: Maybe<Scalars['String']['output']>;
+};
+
 export type Homepage = Node & Document & {
   __typename?: 'Homepage';
-  heroHeadline?: Maybe<Scalars['String']['output']>;
-  heroSubtext?: Maybe<Scalars['String']['output']>;
-  heroCTAPrimary?: Maybe<Scalars['String']['output']>;
-  heroCTASecondary?: Maybe<Scalars['String']['output']>;
+  hero?: Maybe<HomepageHero>;
+  categories?: Maybe<HomepageCategories>;
+  trust?: Maybe<HomepageTrust>;
+  studio?: Maybe<HomepageStudio>;
+  cta?: Maybe<HomepageCta>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
   _values: Scalars['JSON']['output'];
@@ -237,11 +303,77 @@ export type StringFilter = {
   in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
+export type ImageFilter = {
+  startsWith?: InputMaybe<Scalars['String']['input']>;
+  eq?: InputMaybe<Scalars['String']['input']>;
+  exists?: InputMaybe<Scalars['Boolean']['input']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type HomepageHeroFilter = {
+  badge?: InputMaybe<StringFilter>;
+  headline?: InputMaybe<StringFilter>;
+  accent?: InputMaybe<StringFilter>;
+  subtext?: InputMaybe<StringFilter>;
+  primaryCtaText?: InputMaybe<StringFilter>;
+  primaryCtaLink?: InputMaybe<StringFilter>;
+  secondaryCtaText?: InputMaybe<StringFilter>;
+  secondaryCtaLink?: InputMaybe<StringFilter>;
+  backgroundImage?: InputMaybe<ImageFilter>;
+};
+
+export type HomepageCategoriesItemsFilter = {
+  title?: InputMaybe<StringFilter>;
+  subtitle?: InputMaybe<StringFilter>;
+  href?: InputMaybe<StringFilter>;
+  bg?: InputMaybe<StringFilter>;
+  image?: InputMaybe<ImageFilter>;
+};
+
+export type HomepageCategoriesFilter = {
+  label?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  subtitle?: InputMaybe<StringFilter>;
+  items?: InputMaybe<HomepageCategoriesItemsFilter>;
+};
+
+export type HomepageTrustItemsFilter = {
+  icon?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  desc?: InputMaybe<StringFilter>;
+};
+
+export type HomepageTrustFilter = {
+  label?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  items?: InputMaybe<HomepageTrustItemsFilter>;
+};
+
+export type HomepageStudioFilter = {
+  label?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  text?: InputMaybe<StringFilter>;
+  features?: InputMaybe<StringFilter>;
+  ctaText?: InputMaybe<StringFilter>;
+  ctaLink?: InputMaybe<StringFilter>;
+};
+
+export type HomepageCtaFilter = {
+  label?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  subtitle?: InputMaybe<StringFilter>;
+  primaryText?: InputMaybe<StringFilter>;
+  primaryLink?: InputMaybe<StringFilter>;
+  secondaryText?: InputMaybe<StringFilter>;
+  secondaryLink?: InputMaybe<StringFilter>;
+};
+
 export type HomepageFilter = {
-  heroHeadline?: InputMaybe<StringFilter>;
-  heroSubtext?: InputMaybe<StringFilter>;
-  heroCTAPrimary?: InputMaybe<StringFilter>;
-  heroCTASecondary?: InputMaybe<StringFilter>;
+  hero?: InputMaybe<HomepageHeroFilter>;
+  categories?: InputMaybe<HomepageCategoriesFilter>;
+  trust?: InputMaybe<HomepageTrustFilter>;
+  studio?: InputMaybe<HomepageStudioFilter>;
+  cta?: InputMaybe<HomepageCtaFilter>;
 };
 
 export type HomepageConnectionEdges = {
@@ -483,11 +615,70 @@ export type DocumentMutation = {
   settings?: InputMaybe<SettingsMutation>;
 };
 
+export type HomepageHeroMutation = {
+  badge?: InputMaybe<Scalars['String']['input']>;
+  headline?: InputMaybe<Scalars['String']['input']>;
+  accent?: InputMaybe<Scalars['String']['input']>;
+  subtext?: InputMaybe<Scalars['String']['input']>;
+  primaryCtaText?: InputMaybe<Scalars['String']['input']>;
+  primaryCtaLink?: InputMaybe<Scalars['String']['input']>;
+  secondaryCtaText?: InputMaybe<Scalars['String']['input']>;
+  secondaryCtaLink?: InputMaybe<Scalars['String']['input']>;
+  backgroundImage?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type HomepageCategoriesItemsMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  subtitle?: InputMaybe<Scalars['String']['input']>;
+  href?: InputMaybe<Scalars['String']['input']>;
+  bg?: InputMaybe<Scalars['String']['input']>;
+  image?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type HomepageCategoriesMutation = {
+  label?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  subtitle?: InputMaybe<Scalars['String']['input']>;
+  items?: InputMaybe<Array<InputMaybe<HomepageCategoriesItemsMutation>>>;
+};
+
+export type HomepageTrustItemsMutation = {
+  icon?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  desc?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type HomepageTrustMutation = {
+  label?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  items?: InputMaybe<Array<InputMaybe<HomepageTrustItemsMutation>>>;
+};
+
+export type HomepageStudioMutation = {
+  label?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  text?: InputMaybe<Scalars['String']['input']>;
+  features?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  ctaText?: InputMaybe<Scalars['String']['input']>;
+  ctaLink?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type HomepageCtaMutation = {
+  label?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  subtitle?: InputMaybe<Scalars['String']['input']>;
+  primaryText?: InputMaybe<Scalars['String']['input']>;
+  primaryLink?: InputMaybe<Scalars['String']['input']>;
+  secondaryText?: InputMaybe<Scalars['String']['input']>;
+  secondaryLink?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type HomepageMutation = {
-  heroHeadline?: InputMaybe<Scalars['String']['input']>;
-  heroSubtext?: InputMaybe<Scalars['String']['input']>;
-  heroCTAPrimary?: InputMaybe<Scalars['String']['input']>;
-  heroCTASecondary?: InputMaybe<Scalars['String']['input']>;
+  hero?: InputMaybe<HomepageHeroMutation>;
+  categories?: InputMaybe<HomepageCategoriesMutation>;
+  trust?: InputMaybe<HomepageTrustMutation>;
+  studio?: InputMaybe<HomepageStudioMutation>;
+  cta?: InputMaybe<HomepageCtaMutation>;
 };
 
 export type ProjectMutation = {
@@ -516,7 +707,7 @@ export type SettingsMutation = {
   goldColor?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type HomepagePartsFragment = { __typename: 'Homepage', heroHeadline?: string | null, heroSubtext?: string | null, heroCTAPrimary?: string | null, heroCTASecondary?: string | null };
+export type HomepagePartsFragment = { __typename: 'Homepage', hero?: { __typename: 'HomepageHero', badge?: string | null, headline?: string | null, accent?: string | null, subtext?: string | null, primaryCtaText?: string | null, primaryCtaLink?: string | null, secondaryCtaText?: string | null, secondaryCtaLink?: string | null, backgroundImage?: string | null } | null, categories?: { __typename: 'HomepageCategories', label?: string | null, title?: string | null, subtitle?: string | null, items?: Array<{ __typename: 'HomepageCategoriesItems', title?: string | null, subtitle?: string | null, href?: string | null, bg?: string | null, image?: string | null } | null> | null } | null, trust?: { __typename: 'HomepageTrust', label?: string | null, title?: string | null, items?: Array<{ __typename: 'HomepageTrustItems', icon?: string | null, title?: string | null, desc?: string | null } | null> | null } | null, studio?: { __typename: 'HomepageStudio', label?: string | null, title?: string | null, text?: string | null, features?: Array<string | null> | null, ctaText?: string | null, ctaLink?: string | null } | null, cta?: { __typename: 'HomepageCta', label?: string | null, title?: string | null, subtitle?: string | null, primaryText?: string | null, primaryLink?: string | null, secondaryText?: string | null, secondaryLink?: string | null } | null };
 
 export type ProjectPartsFragment = { __typename: 'Project', title: string, description?: string | null, category?: string | null, completionDate?: string | null, images?: Array<string | null> | null };
 
@@ -529,7 +720,7 @@ export type HomepageQueryVariables = Exact<{
 }>;
 
 
-export type HomepageQuery = { __typename?: 'Query', homepage: { __typename: 'Homepage', id: string, heroHeadline?: string | null, heroSubtext?: string | null, heroCTAPrimary?: string | null, heroCTASecondary?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type HomepageQuery = { __typename?: 'Query', homepage: { __typename: 'Homepage', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero?: { __typename: 'HomepageHero', badge?: string | null, headline?: string | null, accent?: string | null, subtext?: string | null, primaryCtaText?: string | null, primaryCtaLink?: string | null, secondaryCtaText?: string | null, secondaryCtaLink?: string | null, backgroundImage?: string | null } | null, categories?: { __typename: 'HomepageCategories', label?: string | null, title?: string | null, subtitle?: string | null, items?: Array<{ __typename: 'HomepageCategoriesItems', title?: string | null, subtitle?: string | null, href?: string | null, bg?: string | null, image?: string | null } | null> | null } | null, trust?: { __typename: 'HomepageTrust', label?: string | null, title?: string | null, items?: Array<{ __typename: 'HomepageTrustItems', icon?: string | null, title?: string | null, desc?: string | null } | null> | null } | null, studio?: { __typename: 'HomepageStudio', label?: string | null, title?: string | null, text?: string | null, features?: Array<string | null> | null, ctaText?: string | null, ctaLink?: string | null } | null, cta?: { __typename: 'HomepageCta', label?: string | null, title?: string | null, subtitle?: string | null, primaryText?: string | null, primaryLink?: string | null, secondaryText?: string | null, secondaryLink?: string | null } | null } };
 
 export type HomepageConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -541,7 +732,7 @@ export type HomepageConnectionQueryVariables = Exact<{
 }>;
 
 
-export type HomepageConnectionQuery = { __typename?: 'Query', homepageConnection: { __typename?: 'HomepageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'HomepageConnectionEdges', cursor: string, node?: { __typename: 'Homepage', id: string, heroHeadline?: string | null, heroSubtext?: string | null, heroCTAPrimary?: string | null, heroCTASecondary?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type HomepageConnectionQuery = { __typename?: 'Query', homepageConnection: { __typename?: 'HomepageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'HomepageConnectionEdges', cursor: string, node?: { __typename: 'Homepage', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero?: { __typename: 'HomepageHero', badge?: string | null, headline?: string | null, accent?: string | null, subtext?: string | null, primaryCtaText?: string | null, primaryCtaLink?: string | null, secondaryCtaText?: string | null, secondaryCtaLink?: string | null, backgroundImage?: string | null } | null, categories?: { __typename: 'HomepageCategories', label?: string | null, title?: string | null, subtitle?: string | null, items?: Array<{ __typename: 'HomepageCategoriesItems', title?: string | null, subtitle?: string | null, href?: string | null, bg?: string | null, image?: string | null } | null> | null } | null, trust?: { __typename: 'HomepageTrust', label?: string | null, title?: string | null, items?: Array<{ __typename: 'HomepageTrustItems', icon?: string | null, title?: string | null, desc?: string | null } | null> | null } | null, studio?: { __typename: 'HomepageStudio', label?: string | null, title?: string | null, text?: string | null, features?: Array<string | null> | null, ctaText?: string | null, ctaLink?: string | null } | null, cta?: { __typename: 'HomepageCta', label?: string | null, title?: string | null, subtitle?: string | null, primaryText?: string | null, primaryLink?: string | null, secondaryText?: string | null, secondaryLink?: string | null } | null } | null } | null> | null } };
 
 export type ProjectQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -603,10 +794,62 @@ export type SettingsConnectionQuery = { __typename?: 'Query', settingsConnection
 export const HomepagePartsFragmentDoc = gql`
     fragment HomepageParts on Homepage {
   __typename
-  heroHeadline
-  heroSubtext
-  heroCTAPrimary
-  heroCTASecondary
+  hero {
+    __typename
+    badge
+    headline
+    accent
+    subtext
+    primaryCtaText
+    primaryCtaLink
+    secondaryCtaText
+    secondaryCtaLink
+    backgroundImage
+  }
+  categories {
+    __typename
+    label
+    title
+    subtitle
+    items {
+      __typename
+      title
+      subtitle
+      href
+      bg
+      image
+    }
+  }
+  trust {
+    __typename
+    label
+    title
+    items {
+      __typename
+      icon
+      title
+      desc
+    }
+  }
+  studio {
+    __typename
+    label
+    title
+    text
+    features
+    ctaText
+    ctaLink
+  }
+  cta {
+    __typename
+    label
+    title
+    subtitle
+    primaryText
+    primaryLink
+    secondaryText
+    secondaryLink
+  }
 }
     `;
 export const ProjectPartsFragmentDoc = gql`
@@ -943,7 +1186,7 @@ export const ExperimentalGetTinaClient = () =>
   getSdk(
     generateRequester(
       createClient({
-        url: "https://content.tinajs.io/1.6/content/00000000-0000-0000-0000-000000000000/github/main",
+        url: "http://localhost:4001/graphql",
         queries,
       })
     )

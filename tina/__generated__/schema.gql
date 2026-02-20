@@ -96,11 +96,70 @@ type Collection {
 
 union DocumentNode = Homepage | Project | Review | Settings | Folder
 
+type HomepageHero {
+  badge: String
+  headline: String
+  accent: String
+  subtext: String
+  primaryCtaText: String
+  primaryCtaLink: String
+  secondaryCtaText: String
+  secondaryCtaLink: String
+  backgroundImage: String
+}
+
+type HomepageCategoriesItems {
+  title: String
+  subtitle: String
+  href: String
+  bg: String
+  image: String
+}
+
+type HomepageCategories {
+  label: String
+  title: String
+  subtitle: String
+  items: [HomepageCategoriesItems]
+}
+
+type HomepageTrustItems {
+  icon: String
+  title: String
+  desc: String
+}
+
+type HomepageTrust {
+  label: String
+  title: String
+  items: [HomepageTrustItems]
+}
+
+type HomepageStudio {
+  label: String
+  title: String
+  text: String
+  features: [String]
+  ctaText: String
+  ctaLink: String
+}
+
+type HomepageCta {
+  label: String
+  title: String
+  subtitle: String
+  primaryText: String
+  primaryLink: String
+  secondaryText: String
+  secondaryLink: String
+}
+
 type Homepage implements Node & Document {
-  heroHeadline: String
-  heroSubtext: String
-  heroCTAPrimary: String
-  heroCTASecondary: String
+  hero: HomepageHero
+  categories: HomepageCategories
+  trust: HomepageTrust
+  studio: HomepageStudio
+  cta: HomepageCta
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
@@ -113,11 +172,77 @@ input StringFilter {
   in: [String]
 }
 
+input ImageFilter {
+  startsWith: String
+  eq: String
+  exists: Boolean
+  in: [String]
+}
+
+input HomepageHeroFilter {
+  badge: StringFilter
+  headline: StringFilter
+  accent: StringFilter
+  subtext: StringFilter
+  primaryCtaText: StringFilter
+  primaryCtaLink: StringFilter
+  secondaryCtaText: StringFilter
+  secondaryCtaLink: StringFilter
+  backgroundImage: ImageFilter
+}
+
+input HomepageCategoriesItemsFilter {
+  title: StringFilter
+  subtitle: StringFilter
+  href: StringFilter
+  bg: StringFilter
+  image: ImageFilter
+}
+
+input HomepageCategoriesFilter {
+  label: StringFilter
+  title: StringFilter
+  subtitle: StringFilter
+  items: HomepageCategoriesItemsFilter
+}
+
+input HomepageTrustItemsFilter {
+  icon: StringFilter
+  title: StringFilter
+  desc: StringFilter
+}
+
+input HomepageTrustFilter {
+  label: StringFilter
+  title: StringFilter
+  items: HomepageTrustItemsFilter
+}
+
+input HomepageStudioFilter {
+  label: StringFilter
+  title: StringFilter
+  text: StringFilter
+  features: StringFilter
+  ctaText: StringFilter
+  ctaLink: StringFilter
+}
+
+input HomepageCtaFilter {
+  label: StringFilter
+  title: StringFilter
+  subtitle: StringFilter
+  primaryText: StringFilter
+  primaryLink: StringFilter
+  secondaryText: StringFilter
+  secondaryLink: StringFilter
+}
+
 input HomepageFilter {
-  heroHeadline: StringFilter
-  heroSubtext: StringFilter
-  heroCTAPrimary: StringFilter
-  heroCTASecondary: StringFilter
+  hero: HomepageHeroFilter
+  categories: HomepageCategoriesFilter
+  trust: HomepageTrustFilter
+  studio: HomepageStudioFilter
+  cta: HomepageCtaFilter
 }
 
 type HomepageConnectionEdges {
@@ -266,11 +391,70 @@ input DocumentMutation {
   settings: SettingsMutation
 }
 
+input HomepageHeroMutation {
+  badge: String
+  headline: String
+  accent: String
+  subtext: String
+  primaryCtaText: String
+  primaryCtaLink: String
+  secondaryCtaText: String
+  secondaryCtaLink: String
+  backgroundImage: String
+}
+
+input HomepageCategoriesItemsMutation {
+  title: String
+  subtitle: String
+  href: String
+  bg: String
+  image: String
+}
+
+input HomepageCategoriesMutation {
+  label: String
+  title: String
+  subtitle: String
+  items: [HomepageCategoriesItemsMutation]
+}
+
+input HomepageTrustItemsMutation {
+  icon: String
+  title: String
+  desc: String
+}
+
+input HomepageTrustMutation {
+  label: String
+  title: String
+  items: [HomepageTrustItemsMutation]
+}
+
+input HomepageStudioMutation {
+  label: String
+  title: String
+  text: String
+  features: [String]
+  ctaText: String
+  ctaLink: String
+}
+
+input HomepageCtaMutation {
+  label: String
+  title: String
+  subtitle: String
+  primaryText: String
+  primaryLink: String
+  secondaryText: String
+  secondaryLink: String
+}
+
 input HomepageMutation {
-  heroHeadline: String
-  heroSubtext: String
-  heroCTAPrimary: String
-  heroCTASecondary: String
+  hero: HomepageHeroMutation
+  categories: HomepageCategoriesMutation
+  trust: HomepageTrustMutation
+  studio: HomepageStudioMutation
+  cta: HomepageCtaMutation
 }
 
 input ProjectMutation {

@@ -8,10 +8,62 @@ export function gql(strings, ...args) {
 export const HomepagePartsFragmentDoc = gql`
     fragment HomepageParts on Homepage {
   __typename
-  heroHeadline
-  heroSubtext
-  heroCTAPrimary
-  heroCTASecondary
+  hero {
+    __typename
+    badge
+    headline
+    accent
+    subtext
+    primaryCtaText
+    primaryCtaLink
+    secondaryCtaText
+    secondaryCtaLink
+    backgroundImage
+  }
+  categories {
+    __typename
+    label
+    title
+    subtitle
+    items {
+      __typename
+      title
+      subtitle
+      href
+      bg
+      image
+    }
+  }
+  trust {
+    __typename
+    label
+    title
+    items {
+      __typename
+      icon
+      title
+      desc
+    }
+  }
+  studio {
+    __typename
+    label
+    title
+    text
+    features
+    ctaText
+    ctaLink
+  }
+  cta {
+    __typename
+    label
+    title
+    subtitle
+    primaryText
+    primaryLink
+    secondaryText
+    secondaryLink
+  }
 }
     `;
 export const ProjectPartsFragmentDoc = gql`
@@ -322,7 +374,7 @@ const generateRequester = (client) => {
 export const ExperimentalGetTinaClient = () => getSdk(
   generateRequester(
     createClient({
-      url: "https://content.tinajs.io/1.6/content/00000000-0000-0000-0000-000000000000/github/main",
+      url: "http://localhost:4001/graphql",
       queries
     })
   )
