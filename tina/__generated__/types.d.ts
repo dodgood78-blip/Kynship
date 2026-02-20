@@ -406,7 +406,7 @@ export type ProjectFilter = {
   description?: InputMaybe<StringFilter>;
   category?: InputMaybe<StringFilter>;
   completionDate?: InputMaybe<StringFilter>;
-  images?: InputMaybe<StringFilter>;
+  images?: InputMaybe<ImageFilter>;
 };
 
 export type ProjectConnectionEdges = {

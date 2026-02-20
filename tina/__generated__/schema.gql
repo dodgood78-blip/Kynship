@@ -272,7 +272,7 @@ input ProjectFilter {
   description: StringFilter
   category: StringFilter
   completionDate: StringFilter
-  images: StringFilter
+  images: ImageFilter
 }
 
 type ProjectConnectionEdges {
