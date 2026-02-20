@@ -75,21 +75,21 @@ export default function Footer({ settings }) {
                         <a href={facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook">
                             <FaFacebookF size={20} />
                         </a>
-                        {tiktok && (
-                            <a href={tiktok} target="_blank" rel="noopener noreferrer" aria-label="TikTok">
-                                <FaTiktok size={20} />
-                            </a>
-                        )}
-                        {twitter && (
-                            <a href={twitter} target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
-                                <FaXTwitter size={20} />
-                            </a>
-                        )}
-                        {pinterest && (
-                            <a href={pinterest} target="_blank" rel="noopener noreferrer" aria-label="Pinterest">
-                                <FaPinterest size={20} />
-                            </a>
-                        )}
+
+                        <a href={tiktok} target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+                            <FaTiktok size={20} />
+                        </a>
+
+
+                        <a href={twitter} target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
+                            <FaXTwitter size={20} />
+                        </a>
+
+
+                        <a href={pinterest} target="_blank" rel="noopener noreferrer" aria-label="Pinterest">
+                            <FaPinterest size={20} />
+                        </a>
+
                     </div>
                 </div>
             </div>
