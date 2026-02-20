@@ -1,19 +1,12 @@
-import fs from 'fs';
-import path from 'path';
+import { getRuntimeProjects } from '../../lib/runtimeContent';
 
-export default function handler(req, res) {
+export default async function handler(req, res) {
     if (req.method !== 'GET') {
         return res.status(405).json({ success: false, message: 'Method not allowed' });
     }
 
     try {
-        const contentDir = path.join(process.cwd(), 'content', 'projects');
-        const files = fs.readdirSync(contentDir).filter((f) => f.endsWith('.json'));
-        const projects = files.map((file) => {
-            const raw = fs.readFileSync(path.join(contentDir, file), 'utf-8');
-            const data = JSON.parse(raw);
-            return { ...data, id: file.replace(/\.json$/, '') };
-        });
+        const projects = await getRuntimeProjects();
 
         return res.status(200).json({ success: true, projects });
     } catch (err) {

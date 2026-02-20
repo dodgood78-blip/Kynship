@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Head from 'next/head';
 import styles from '../styles/Contact.module.css';
-import { loadSettings } from '../lib/siteContent';
+import { getRuntimeSettings } from '../lib/runtimeContent';
 import { buildWhatsappUrl, normalizeWhatsappNumber } from '../lib/siteUtils';
 
 const projectTypes = [
@@ -236,11 +236,10 @@ export default function ContactPage({ settings }) {
     );
 }
 
-export async function getStaticProps() {
-    const settings = loadSettings();
+export async function getServerSideProps() {
+    const settings = await getRuntimeSettings();
 
     return {
         props: { settings },
-        revalidate: 1,
     };
 }

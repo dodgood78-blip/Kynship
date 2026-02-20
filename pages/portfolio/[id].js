@@ -1,9 +1,10 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import fs from 'fs';
-import path from 'path';
 import styles from '../../styles/ProjectDetail.module.css';
-import { loadSettings } from '../../lib/siteContent';
+import {
+    getRuntimeProjectById,
+    getRuntimeSettings,
+} from '../../lib/runtimeContent';
 import { buildWhatsappUrl, normalizeWhatsappNumber } from '../../lib/siteUtils';
 
 export default function ProjectDetailPage({ project, settings }) {
@@ -96,52 +97,20 @@ export default function ProjectDetailPage({ project, settings }) {
     );
 }
 
-export async function getStaticPaths() {
-    const contentDir = path.join(process.cwd(), 'content', 'projects');
-    let paths = [];
-
-    try {
-        if (fs.existsSync(contentDir)) {
-            const files = fs.readdirSync(contentDir).filter((f) => f.endsWith('.json'));
-            paths = files.map((file) => {
-                return { params: { id: file.replace(/\.json$/, '') } };
-            });
-        }
-    } catch (err) {
-        console.error('Error reading paths:', err);
-    }
-
-    return { paths, fallback: 'blocking' };
-}
-
-export async function getStaticProps({ params }) {
-    const contentDir = path.join(process.cwd(), 'content', 'projects');
-    let project = null;
-    const settings = loadSettings();
-
-    try {
-        const files = fs.readdirSync(contentDir).filter((f) => f.endsWith('.json'));
-        for (const file of files) {
-            const id = file.replace(/\.json$/, '');
-            if (id === params.id) {
-                const raw = fs.readFileSync(path.join(contentDir, file), 'utf-8');
-                project = { ...JSON.parse(raw), id };
-                break;
-            }
-        }
-    } catch (err) {
-        console.error('Error reading project:', err);
-    }
+export async function getServerSideProps({ params }) {
+    const projectId = params?.id || '';
+    const [settings, project] = await Promise.all([
+        getRuntimeSettings(),
+        getRuntimeProjectById(projectId),
+    ]);
 
     if (!project) {
         return {
             notFound: true,
-            revalidate: 1,
         };
     }
 
     return {
         props: { project, settings },
-        revalidate: 1,
     };
 }

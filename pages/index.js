@@ -1,5 +1,3 @@
-import fs from 'fs';
-import path from 'path';
 import Head from 'next/head';
 import HeroSection from '../components/HeroSection';
 import CategoriesSection from '../components/CategoriesSection';
@@ -7,7 +5,11 @@ import TrustSection from '../components/TrustSection';
 import StudioSection from '../components/StudioSection';
 import ReviewsSection from '../components/ReviewsSection';
 import CTASection from '../components/CTASection';
-import { loadReviews, loadSettings } from '../lib/siteContent';
+import {
+    getRuntimeHomepage,
+    getRuntimeReviews,
+    getRuntimeSettings,
+} from '../lib/runtimeContent';
 import { normalizeWhatsappNumber } from '../lib/siteUtils';
 
 const defaultHomeContent = {
@@ -143,22 +145,14 @@ export default function HomePage({ homeContent, reviews }) {
     );
 }
 
-export async function getStaticProps() {
-    const homepagePath = path.join(process.cwd(), 'content', 'homepage', 'index.json');
-    let homeContent = defaultHomeContent;
-    const settings = loadSettings();
-    const reviews = loadReviews();
+export async function getServerSideProps() {
+    const [settings, reviews, storedHomeContent] = await Promise.all([
+        getRuntimeSettings(),
+        getRuntimeReviews(),
+        getRuntimeHomepage(),
+    ]);
 
-    try {
-        if (fs.existsSync(homepagePath)) {
-            const raw = fs.readFileSync(homepagePath, 'utf-8');
-            const parsed = JSON.parse(raw);
-            homeContent = mergeContent(defaultHomeContent, parsed);
-        }
-    } catch (error) {
-        console.error('Error reading homepage content:', error);
-    }
-
+    let homeContent = mergeContent(defaultHomeContent, storedHomeContent || {});
     homeContent = applySettingsToHomeContent(homeContent, settings);
 
     return {
@@ -167,6 +161,5 @@ export async function getStaticProps() {
             reviews,
             settings,
         },
-        revalidate: 1,
     };
 }

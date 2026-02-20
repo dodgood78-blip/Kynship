@@ -1,9 +1,7 @@
 import Head from 'next/head';
-import fs from 'fs';
-import path from 'path';
 import ProjectCard from '../../components/ProjectCard';
 import styles from '../../styles/Portfolio.module.css';
-import { loadSettings } from '../../lib/siteContent';
+import { getRuntimeProjects, getRuntimeSettings } from '../../lib/runtimeContent';
 
 export default function PortfolioPage({ projects }) {
     return (
@@ -52,26 +50,13 @@ export default function PortfolioPage({ projects }) {
     );
 }
 
-export async function getStaticProps() {
-    const contentDir = path.join(process.cwd(), 'content', 'projects');
-    let projects = [];
-    const settings = loadSettings();
-
-    try {
-        if (fs.existsSync(contentDir)) {
-            const files = fs.readdirSync(contentDir).filter((f) => f.endsWith('.json'));
-            projects = files.map((file) => {
-                const raw = fs.readFileSync(path.join(contentDir, file), 'utf-8');
-                const data = JSON.parse(raw);
-                return { ...data, id: file.replace(/\.json$/, '') };
-            });
-        }
-    } catch (err) {
-        console.error('Error reading projects:', err);
-    }
+export async function getServerSideProps() {
+    const [settings, projects] = await Promise.all([
+        getRuntimeSettings(),
+        getRuntimeProjects(),
+    ]);
 
     return {
         props: { projects, settings },
-        revalidate: 1,
     };
 }
